@@ -1,0 +1,3622 @@
+---
+title: ""
+author: ""
+date: ""
+output: 
+  pdf_document:
+    toc: false
+geometry: margin=1in
+fontsize: 12pt
+---
+
+```{=tex}
+\begin{titlepage} % Crea una portada completa
+\begin{center}
+
+% Insertar la imagen (ajusta el nombre y tamaño según necesites)
+\includegraphics[width=10cm]{colmex.jpg}  
+
+\vspace{0.6cm}  
+
+{\Large \textbf{Maestría en Economía}}  
+
+\vspace{0.3cm}
+
+{\Large \textbf{2024-2026}}  
+
+\vspace{0.6cm}  
+
+\textcolor{red!50!black}{\noindent\rule{16cm}{0.8pt}}  % Línea horizontal  
+\vspace{0.5cm}  
+
+{\Huge \textbf{Macroeconomía II}}
+
+\vspace{0.5cm} 
+
+{\large \textbf{Tarea 2}} 
+
+\vspace{0.5cm}  
+\textcolor{red!50!black}{\noindent\rule{16cm}{0.8pt}}  % Línea horizontal    
+
+{\LARGE \textbf{Elaborado por:}}  
+\vspace{0.3cm}  
+
+{\large José Daniel Fuentes García}  
+
+{\large Andrés Ancona}  
+
+{\large Eduardo Moreno}  
+
+\vspace{0.5cm}  
+
+{\LARGE \textbf{Profesor}}  
+\vspace{0.3cm}  
+
+{\large Santiago Bazdresch}  
+
+\vspace{0.5cm}  
+
+{\LARGE \textbf{Fecha}}  
+\vspace{0.3cm}  
+
+{\large 17 de marzo de 2025}  
+
+\end{center}
+\end{titlepage}
+
+```
+
+\newpage
+
+```{=latex}
+\tableofcontents
+```
+
+\newpage
+
+```{r paquetes_necesarios, include=FALSE, echo=FALSE}
+# Instalar y cargar librerías necesarias
+
+# Verificación e instalación de cada paquete si no está instalado
+if (!require(readxl)) install.packages("readxl", dependencies=TRUE)
+if (!require(dplyr)) install.packages("dplyr", dependencies=TRUE)
+if (!require(tidyr)) install.packages("tidyr", dependencies=TRUE)
+if (!require(ggplot2)) install.packages("ggplot2", dependencies=TRUE)
+if (!require(stringr)) install.packages("stringr", dependencies=TRUE)
+if (!require(scales)) install.packages("scales", dependencies=TRUE)
+if (!require(mFilter)) install.packages("mFilter", dependencies=TRUE)
+if (!require(knitr)) install.packages("knitr", dependencies=TRUE)
+if (!require(kableExtra)) install.packages("kableExtra", dependencies=TRUE)
+if (!require(patchwork)) install.packages("patchwork", dependencies=TRUE)
+if (!require(igraph)) install.packages("igraph", dependencies=TRUE)
+if (!require(lubridate)) install.packages("lubridate", dependencies=TRUE)
+if (!require(readr)) install.packages("readr", dependencies=TRUE)
+if (!require(viridis)) install.packages("viridis", dependencies=TRUE)
+
+# Cargar librerías
+library(readxl)    # Para leer archivos Excel
+library(dplyr)     # Para manipulación de datos
+library(tidyr)     # Para limpiar y transformar datos
+library(ggplot2)   # Para gráficos
+library(stringr)   # Para manipulación de texto
+library(scales)    # Para manejo de escalas en gráficos
+library(mFilter)   # Para filtrado de series temporales
+library(knitr)     # Para generación de reportes en RMarkdown
+library(kableExtra) # Para mejorar tablas en Markdown
+library(patchwork) # Para organizar múltiples gráficos
+library(igraph)    # Para análisis de redes
+library(lubridate) # Para manejo de fechas
+library(readr)     # Para leer archivos de texto y CSV
+library(viridis)   # Para paletas de colores en gráficos
+
+```
+
+
+## **Instrucciones**
+
+Realice los siguientes ejercicios en equipo.
+
+## **Ejercicio 1 **
+Resuelva los ejercicios 8.5, 8.10 y 8.11 (Romer, 5a Ed). Realice estos con ayuda de su
+laboratorista y entregue las soluciones a máquina, utilizando LaTeX. [3 horas,1 punto
+cada inciso]
+
+### **Romer8.5** 
+***Siguiendo a Hansen y Singleton, 1983.) Suponga que la utilidad instantánea tiene la forma de aversión relativa al riesgo constante:$$ u(C_t) = \frac{C_t^{1-\theta}}{1-\theta}, \quad \theta > 0 $$ Suponga que la tasa de interés real, \( r \), es constante pero no necesariamente igual a la tasa de descuento, \( \rho \).***
+
+#### ***a)***
+***Encuentre la ecuación de Euler que relacione \( C_t \) con las expectativas sobre \( C_{t+1} \).***
+
+##### \textcolor{red}{RESPUESTA}
+
+El ejercicio se basa en el modelo de consumo óptimo con una función de utilidad de aversión relativa constante al riesgo (CRRA), dada por  
+
+$$ u(C_t) = \frac{C_t^{1-\theta}}{1-\theta}, \quad \theta > 0. $$  
+
+Se asume que la tasa de interés real \( r \) es constante, pero no necesariamente igual a la tasa de descuento \( \rho \). El objetivo es encontrar la ecuación de Euler que relacione el consumo \( C_t \) con su expectativa en \( C_{t+1} \).  
+
+Para determinar la condición óptima, primero se obtiene la utilidad marginal, que es:  
+
+$$ u'(C_t) = C_t^{-\theta}. $$  
+
+Cuando un agente decide consumir una unidad adicional en el período \( t \), el costo marginal en términos de utilidad es:  
+
+$$ C_t^{-\theta} dC. $$  
+
+Alternativamente, si el agente decide posponer ese consumo y ahorrar en su lugar, su capital crecerá a una tasa \( (1+r) \) y podrá consumir \( (1+r)dC \) en el período \( t+1 \). La utilidad marginal del consumo en el siguiente período es \( C_{t+1}^{-\theta} \), por lo que el beneficio esperado descontado es:  
+
+$$
+\frac{1}{1+\rho} E_t \left[ C_{t+1}^{-\theta} (1+r) dC \right].
+$$  
+
+El equilibrio óptimo requiere que el costo marginal de consumir hoy sea igual al beneficio esperado de posponer ese consumo, lo que lleva a la ecuación:  
+
+$$
+C_t^{-\theta} dC = \frac{1}{1+\rho} E_t \left[ C_{t+1}^{-\theta} (1+r) dC \right].
+$$  
+
+Cancelando \( dC \) en ambos lados y reorganizando la expresión se obtiene la ecuación de Euler:  
+
+$$
+C_t^{-\theta} = \frac{1+r}{1+\rho} E_t [C_{t+1}^{-\theta}].
+$$  
+
+Esta ecuación describe la relación óptima entre el consumo presente y el esperado futuro, ajustada por la tasa de interés y la tasa de descuento. Si la tasa de interés \( r \) es mayor que la tasa de descuento \( \rho \), el agente estará incentivado a ahorrar más, mientras que si \( r \) es menor que \( \rho \), preferirá consumir más en el presente.  
+
+El parámetro \( \theta \) mide la elasticidad de sustitución intertemporal del consumo: valores altos de \( \theta \) indican una mayor aversión a cambios en el consumo entre períodos. En conclusión, la ecuación de Euler refleja cómo los agentes equilibran su consumo en el tiempo para maximizar su utilidad total.
+
+
+
+
+
+#### ***b)***
+***Suponga que el logaritmo del ingreso está distribuido normalmente, y que como resultado el logaritmo de \( C_{t+1} \) también está distribuido normalmente. Sea \( \sigma^2 \) la varianza condicional de \( \ln C_{t+1} \) dada la información disponible en el tiempo \( t \).Reescriba la expresión obtenida en el inciso (a) en términos de \( \ln C_t \), \( E_t[\ln C_{t+1}] \), \( \sigma^2 \), y los parámetros \( r \), \( \rho \) y \( \theta \).(Sugerencia: Si una variable \( x \) está distribuida normalmente con media \( \mu \) y varianza \( V \), entonces  \[E[e^x] = e^{\mu + V/2}\].***
+
+##### \textcolor{red}{RESPUESTA}
+Se nos dice que el logaritmo del ingreso sigue una distribución normal, lo que implica que el logaritmo del consumo \( \ln C_{t+1} \) también se distribuye normalmente con varianza condicional \( \sigma^2 \). Partimos de la ecuación de Euler obtenida en el inciso anterior:
+
+$$
+C_t^{-\theta} = \frac{1+r}{1+\rho} E_t [C_{t+1}^{-\theta}].
+$$
+
+Para expresar esta ecuación en términos del logaritmo del consumo, reescribimos \( C_t^{-\theta} \) como:
+
+$$
+C_t^{-\theta} = \exp \left\{ \ln(C_t^{-\theta}) \right\} = \exp \left\{ -\theta \ln C_t \right\}.
+$$
+
+Así, la ecuación de Euler se reescribe como:
+
+$$
+\exp(-\theta \ln C_t) = \frac{1+r}{1+\rho} E_t [C_{t+1}^{-\theta}].
+$$
+
+Dado que \( \ln C_{t+1} \sim N(\mu, \sigma^2) \), se usa la propiedad de la esperanza condicional de una variable lognormal, que establece que si \( X \sim N(\mu, V) \), entonces 
+
+$$
+E[e^X] = e^{E[X] + V/2}.
+$$
+
+Aplicando esto a \( C_{t+1}^{-\theta} = e^{-\theta \ln C_{t+1}} \), obtenemos:
+
+$$
+E_t [C_{t+1}^{-\theta}] = E_t \left[ e^{-\theta \ln C_{t+1}} \right] = e^{- \theta E_t[\ln C_{t+1}] + \frac{\theta^2 \sigma^2}{2}}.
+$$
+
+Sustituyendo esta expresión en la ecuación de Euler, se obtiene:
+
+$$
+\exp(-\theta \ln C_t) = \frac{1+r}{1+\rho} e^{- \theta E_t[\ln C_{t+1}] + \frac{\theta^2 \sigma^2}{2}}.
+$$
+
+Tomando logaritmos en ambos lados:
+
+$$
+-\theta \ln C_t = \ln \left( \frac{1+r}{1+\rho} \right) + \left( -\theta E_t[\ln C_{t+1}] + \frac{\theta^2 \sigma^2}{2} \right).
+$$
+
+Reorganizando los términos:
+
+$$
+-\theta \ln C_t = \ln(1+r) - \ln(1+\rho) - \theta E_t[\ln C_{t+1}] + \frac{\theta^2 \sigma^2}{2}.
+$$
+
+Despejando \( \ln C_t \):
+
+$$
+\ln C_t = E_t[\ln C_{t+1}] + \frac{\ln(1+\rho) - \ln(1+r)}{\theta} - \frac{\theta \sigma^2}{2}.
+$$
+
+Esta ecuación muestra que el consumo actual en logaritmos depende de la expectativa del consumo futuro en logaritmos, ajustado por un término que involucra la diferencia entre las tasas de descuento y de interés real, y otro que refleja el impacto de la incertidumbre en el consumo a través de la varianza \( \sigma^2 \).
+
+
+#### ***c)***
+***Demuestre que si \( r \) y \( \sigma^2 \) son constantes en el tiempo, el resultado del inciso (b) implica que el logaritmo del consumo sigue un paseo aleatorio con deriva: \[\ln C_{t+1} = a + \ln C_t + u_{t+1},\]donde \( u \) es ruido blanco.***
+
+##### \textcolor{red}{RESPUESTA}
+Reordenamos la última expresión obtenida en el inciso (b) para despejar \( E_t[\ln C_{t+1}] \):
+
+\[
+E_t[\ln C_{t+1}] = \ln C_t + \frac{\ln(1+r) - \ln(1+\rho)}{\theta} + \frac{\theta \sigma^2}{2}.
+\]
+
+Esta ecuación nos indica que, en esperanza, el logaritmo del consumo cambia según un término constante:
+
+\[
+a = \frac{\ln(1+r) - \ln(1+\rho)}{\theta} + \frac{\theta \sigma^2}{2}.
+\]
+
+Sin embargo, en la realidad, el consumo puede experimentar fluctuaciones aleatorias debido a factores impredecibles. Para capturar estas variaciones, definimos un término de error \( u_{t+1} \) y escribimos:
+
+\[
+\ln C_{t+1} = E_t[\ln C_{t+1}] + u_{t+1}.
+\]
+
+Sustituyendo la expresión de \( E_t[\ln C_{t+1}] \):
+
+\[
+\ln C_{t+1} = \ln C_t + \frac{\ln(1+r) - \ln(1+\rho)}{\theta} + \frac{\theta \sigma^2}{2} + u_{t+1}.
+\]
+
+Dado que \( u_{t+1} \) es un término de error con media cero y no correlacionado en el tiempo (\( E[u_{t+1}] = 0 \) y \( \text{Cor}(u_t, u_{t+1}) = 0 \)), se concluye que el logaritmo del consumo sigue una **caminata aleatoria con deriva**:
+
+\[
+\ln C_{t+1} = a + \ln C_t + u_{t+1}.
+\]
+
+Comparando con la solución de la imagen, se observa que el desarrollo es correcto. La imagen sigue los mismos pasos: despeja \( E_t[\ln C_{t+1}] \), identifica el término constante de la deriva, y añade un error blanco \( u_{t+1} \). Por lo tanto, la respuesta presentada en la imagen es válida y correctamente fundamentada.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ***d)***
+***¿Cómo afectan los cambios en \( r \) y \( \sigma^2 \) al crecimiento esperado del consumo, \( E_t[\ln C_{t+1} - \ln C_t] \)? Interprete el efecto de \( \sigma^2 \) en el crecimiento esperado del consumo a la luz de la discusión sobre el ahorro precautorio en la Sección 8.6.***
+
+##### \textcolor{red}{RESPUESTA}
+Del inciso anterior, tenemos que el crecimiento esperado en el consumo es:
+
+\[
+E_t [\ln C_{t+1} - \ln C_t] = \frac{\ln(1+r) - \ln(1+\rho)}{\theta} + \frac{\theta \sigma^2}{2}.
+\]
+
+Ahora calculamos la derivada parcial respecto a \( r \):
+
+\[
+\frac{\partial E_t [\ln C_{t+1} - \ln C_t]}{\partial r} = \frac{1}{\theta} \cdot \frac{1}{1+r}.
+\]
+
+Dado que \( \theta > 0 \) y \( 1+r > 0 \), se cumple que:
+
+\[
+\frac{1}{\theta} \cdot \frac{1}{1+r} > 0.
+\]
+
+Por lo tanto, un incremento en la tasa de interés real \( r \) incrementa el crecimiento esperado del consumo. Además, cuanto menor sea \( \theta \), mayor será la elasticidad de sustitución intertemporal \( \frac{1}{\theta} \), lo que amplifica el efecto de \( r \) sobre el consumo.
+
+Ahora derivamos respecto a \( \sigma^2 \):
+
+\[
+\frac{\partial E_t [\ln C_{t+1} - \ln C_t]}{\partial \sigma^2} = \frac{\theta}{2}.
+\]
+
+Dado que \( \theta > 0 \), se cumple que:
+
+\[
+\frac{\theta}{2} > 0.
+\]
+
+Esto significa que un incremento en la varianza condicional \( \sigma^2 \) también incrementa el crecimiento esperado del consumo. Este resultado está relacionado con la teoría del **ahorro precautorio**, ya que cuando hay más incertidumbre en el consumo futuro, los agentes aumentan su ahorro, lo que lleva a un mayor crecimiento del consumo a lo largo del tiempo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### **Romer 8.10**
+***El modelo de valoración de activos de Lucas.(Lucas, 1978.) Suponga que los únicos activos en la economía son árboles con vida infinita. La producción equivale al fruto de los árboles, que es exógeno y no puede almacenarse; por lo tanto, \( C_t = Y_t \), donde \( Y_t \) es la producción exógenamente determinada por persona y \( C_t \) es el consumo por persona.Suponga que inicialmente cada consumidor posee la misma cantidad de árboles. Dado que todos los consumidores son idénticos, esto significa que, en equilibrio, el comportamiento del precio de los árboles debe ser tal que, en cada período, el consumidor representativo no desee ni aumentar ni disminuir su tenencia de árboles.  Sea \( P_t \) el precio de un árbol en el período \( t \) (se asume que si un árbol se vende, la venta ocurre después de que el propietario existente reciba la producción de ese período). Finalmente, se asume que el consumidor representativo maximiza  \[E \left[ \sum_{t=0}^{\infty} \frac{\ln C_t}{(1+\rho)^t} \right].\]***
+
+#### ***a)***
+***Suponga que el consumidor representativo reduce su consumo en el período \( t \) en una cantidad infinitesimal, utiliza el ahorro resultante para aumentar su tenencia de árboles y luego vende estas tenencias adicionales en el período \( t+1 \).  Encuentre la condición que \( C_t \) y las expectativas que involucran \( Y_{t+1} \), \( P_{t+1} \) y \( C_{t+1} \) deben satisfacer para que este cambio no afecte la utilidad esperada.  Resuelva esta condición para \( P_t \) en términos de \( Y_t \) y expectativas que involucren \( Y_{t+1} \), \( P_{t+1} \) y \( C_{t+1} \).***
+
+##### \textcolor{red}{RESPUESTA}
+El consumidor representativo reduce su consumo \( C_t \) en una cantidad infinitesimal \( dC_t \) y usa el ahorro resultante para comprar más árboles. Dado que el precio de cada árbol en \( t \) es \( P_t \), el número de árboles adicionales que puede comprar es  
+
+\[
+\frac{dC_t}{P_t}.
+\]
+
+Cada árbol adquirido en \( t \) genera una renta de \( Y_{t+1} \) y puede venderse en \( P_{t+1} \), por lo que el retorno total en \( t+1 \) es  
+
+\[
+\left( Y_{t+1} + P_{t+1} \right) \cdot \frac{dC_t}{P_t}.
+\]
+
+Para que este cambio no afecte la utilidad esperada, el costo marginal en términos de utilidad de reducir \( C_t \) debe ser igual al beneficio marginal esperado en términos de utilidad en \( t+1 \), descontado por \( 1+\rho \). Como la utilidad marginal es \( \frac{1}{C_t} \), el costo marginal es  
+
+\[
+\frac{dC_t}{C_t}.
+\]
+
+El beneficio marginal se obtiene considerando el retorno de los árboles en el período siguiente, ajustado por la utilidad marginal futura  
+
+\[
+E_t \left[ \frac{1}{C_{t+1}} \left( Y_{t+1} + P_{t+1} \right) \cdot \frac{dC_t}{P_t(1+\rho)} \right].
+\]
+
+En equilibrio, el consumidor no desea cambiar su tenencia de árboles, por lo que el costo marginal y el beneficio marginal deben ser iguales  
+
+\[
+\frac{dC_t}{C_t} = E_t \left[ \frac{1}{C_{t+1}} \frac{Y_{t+1} + P_{t+1}}{P_t (1+\rho)} dC_t \right].
+\]
+
+Cancelando \( dC_t \) en ambos lados  
+
+\[
+\frac{1}{C_t} = E_t \left[ \frac{1}{C_{t+1}} \frac{Y_{t+1} + P_{t+1}}{P_t (1+\rho)} \right].
+\]
+
+Multiplicando ambos lados por \( P_t \) y despejando, obtenemos la ecuación fundamental del precio del árbol  
+
+\[
+P_t = E_t \left[ \frac{Y_{t+1} + P_{t+1}}{(1+\rho) \frac{C_{t+1}}{C_t}} \right].
+\]
+
+Esta ecuación implica que el precio actual de los árboles está determinado por el valor presente esperado de sus ingresos futuros, ajustado por la tasa de descuento y la razón de crecimiento del consumo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ***b)***
+***Suponga que  \[\lim_{s \to \infty} E_t \left[ \frac{P_{t+s}}{Y_{t+s} (1+\rho)^s} \right] = 0.\] Dado este supuesto, itere su respuesta del inciso (a) hacia adelante para resolver \( P_t \).(Sugerencia: Use el hecho de que \( C_{t+s} = Y_{t+s} \) para todo \( s \)).***
+
+##### \textcolor{red}{RESPUESTA}
+Para resolver este inciso, iteramos hacia adelante la ecuación obtenida en el inciso (a):
+
+\[
+P_t = E_t \left[ \frac{Y_{t+1} + P_{t+1}}{(1+\rho)} \right].
+\]
+
+Dado que la condición de transversabilidad es  
+
+\[
+\lim_{s \to \infty} E_t \left[ \frac{P_{t+s}}{Y_{t+s} (1+\rho)^s} \right] = 0,
+\]
+
+y que el consumo es igual a la producción \( C_t = Y_t \) para todo \( t \), podemos iterar esta ecuación hacia adelante. Sustituyendo \( P_{t+1} \) en la ecuación original:
+
+\[
+P_t = E_t \left[ \frac{Y_{t+1} + E_{t+1} \left[ \frac{Y_{t+2} + P_{t+2}}{(1+\rho)} \right]}{(1+\rho)} \right].
+\]
+
+Aplicando la propiedad de la expectativa iterada:
+
+\[
+P_t = E_t \left[ \frac{Y_{t+1}}{(1+\rho)} + \frac{Y_{t+2} + P_{t+2}}{(1+\rho)^2} \right].
+\]
+
+Iterando esta ecuación hacia adelante indefinidamente, obtenemos:
+
+\[
+P_t = E_t \left[ \sum_{s=1}^{\infty} \frac{Y_{t+s}}{(1+\rho)^s} + \lim_{s \to \infty} \frac{P_{t+s}}{(1+\rho)^s} \right].
+\]
+
+Usando la condición de transversabilidad,
+
+\[
+\lim_{s \to \infty} E_t \left[ \frac{P_{t+s}}{(1+\rho)^s} \right] = 0,
+\]
+
+lo que nos deja con la ecuación final:
+
+\[
+P_t = E_t \left[ \sum_{s=1}^{\infty} \frac{Y_{t+s}}{(1+\rho)^s} \right].
+\]
+
+Esta ecuación muestra que el precio del árbol hoy es el valor presente descontado de sus flujos de renta futura \( Y_{t+s} \), descontados a una tasa \( 1+\rho \).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ***c)***
+***Explique intuitivamente por qué un aumento en las expectativas de los dividendos futuros no afecta el precio del activo.***
+
+
+##### \textcolor{red}{RESPUESTA}
+En el inciso (b), encontramos que el precio del activo está dado por:
+
+\[
+P_t = E_t \left[ \sum_{s=1}^{\infty} \frac{Y_{t+s}}{(1+\rho)^s} \right].
+\]
+
+Supongamos que, en \( t \), los agentes esperan que los dividendos futuros \( Y_{t+s} \) sean mayores. Como el consumo en cada período es igual a la producción, esto significa que:
+
+\[
+C_t = Y_t, \quad C_{t+s} = Y_{t+s} \text{ para todo } s.
+\]
+
+La ecuación de valoración del activo también puede escribirse como:
+
+\[
+P_t = E_t \left[ \sum_{s=1}^{\infty} \frac{Y_{t+s}}{(1+\rho)^s} \frac{C_t}{C_{t+s}} \right].
+\]
+
+Si \( Y_{t+s} \) y \( C_{t+s} \) aumentan en la misma proporción, la razón \( C_t / C_{t+s} \) se mantiene constante, dejando el valor presente de los dividendos futuros sin cambios. Esto significa que el precio del activo permanece inalterado.
+
+Intuitivamente, en este modelo los árboles son la única fuente de producción y consumo. Si los dividendos esperados aumentan, el consumo futuro también lo hace en la misma proporción. Como el precio del activo depende del valor presente de los dividendos en relación con el consumo, este efecto se anula y el precio del activo no cambia.
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ***d)***
+***¿Sigue el consumo una caminata aleatoria en este modelo?***
+
+##### \textcolor{red}{RESPUESTA}
+Para determinar si el consumo sigue una caminata aleatoria en este modelo, partimos de la ecuación de Euler del consumidor. Como el agente representativo maximiza:
+
+\[
+E \left[ \sum_{t=0}^{\infty} \frac{\ln C_t}{(1+\rho)^t} \right],
+\]
+
+la ecuación de Euler en equilibrio es:
+
+\[
+\frac{1}{C_t} = E_t \left[ \frac{1}{C_{t+1}} \frac{1}{1+\rho} \right].
+\]
+
+Reescribiéndola:
+
+\[
+E_t \left[ C_{t+1} \right] = (1+\rho) C_t.
+\]
+
+Esto implica que el consumo sigue un proceso de crecimiento determinista a tasa \( (1+\rho) \), en lugar de una caminata aleatoria pura.
+
+Dado que en este modelo el consumo es igual a la producción en cada período,
+
+\[
+C_t = Y_t,
+\]
+
+el comportamiento del consumo dependerá de la evolución de \( Y_t \). Si la producción sigue una caminata aleatoria del tipo:
+
+\[
+Y_{t+1} = Y_t + \varepsilon_{t+1},
+\]
+
+con \( \varepsilon_{t+1} \) como un choque de innovación iid, entonces el consumo sigue:
+
+\[
+C_{t+1} = C_t + \varepsilon_{t+1}.
+\]
+
+Esto es la definición de una caminata aleatoria.
+
+Por lo tanto, si la producción sigue una caminata aleatoria, el consumo también lo hará. Si la producción sigue una tendencia determinista con crecimiento \( (1+\rho) \), entonces el consumo también seguirá esa tendencia.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### **Romer 8.11**
+***La prima de riesgo y la concentración de los choques agregados.(Mankiw, 1986.)  Considere una economía con dos posibles estados, cada uno de los cuales ocurre con probabilidad de un medio. En el estado bueno, el consumo de cada individuo es 1. En el estado malo, una fracción \( \lambda \) de la población consume \( 1 - \frac{\phi}{\lambda} \) y el resto consume 1, donde \( 0 < \phi < 1 \) y \( \phi \leq \lambda \leq 1 \). El parámetro \( \phi \) mide la reducción en el consumo promedio en el estado malo, y \( \lambda \) mide qué tan ampliamente se distribuye esa reducción.  Considere dos activos, uno que paga 1 unidad en el estado bueno y otro que paga 1 unidad en el estado malo. Sea \( p \) el precio relativo del activo del estado malo con respecto al activo del estado bueno.***
+
+#### ***a)***
+***Considere a un individuo cuya tenencia inicial de los dos activos es cero y analice el experimento en el que el individuo reduce marginalmente (es decir, vende en corto) su tenencia del activo del estado bueno y usa los ingresos obtenidos para comprar más del activo del estado malo. Derive la condición para que este cambio no afecte la utilidad esperada del individuo.***
+
+##### \textcolor{red}{RESPUESTA}
+El individuo tiene una función de utilidad esperada dada por:
+
+\[
+E[U] = \frac{1}{2} U(C_{\text{bueno}}) + \frac{1}{2} U(C_{\text{malo}})
+\]
+
+ya que cada estado ocurre con probabilidad \( \frac{1}{2} \).
+
+El individuo vende en corto una cantidad infinitesimal \( dA \) del activo del estado bueno, obteniendo \( dA \) unidades de riqueza, ya que el precio del activo del estado bueno es 1. Usa estos ingresos para comprar el activo del estado malo, cuyo precio relativo es \( p \), por lo que puede adquirir \( dA / p \) unidades de este activo.
+
+En el estado bueno, su consumo se reduce en \( dA \), mientras que en el estado malo su consumo aumenta en \( dA / p \). Los nuevos niveles de consumo son:
+
+\[
+C_{\text{bueno}}' = C_{\text{bueno}} - dA,
+\]
+
+\[
+C_{\text{malo}}' = C_{\text{malo}} + \frac{dA}{p}.
+\]
+
+Para que el individuo sea indiferente a este cambio en su portafolio, la utilidad esperada debe permanecer constante, es decir,
+
+\[
+\frac{1}{2} U'(C_{\text{bueno}}) dC_{\text{bueno}} + \frac{1}{2} U'(C_{\text{malo}}) dC_{\text{malo}} = 0.
+\]
+
+Sustituyendo los cambios en consumo:
+
+\[
+\frac{1}{2} U'(C_{\text{bueno}}) (-dA) + \frac{1}{2} U'(C_{\text{malo}}) \frac{dA}{p} = 0.
+\]
+
+Dividiendo por \( dA \):
+
+\[
+\frac{1}{2} U'(C_{\text{malo}}) \frac{1}{p} = \frac{1}{2} U'(C_{\text{bueno}}).
+\]
+
+Multiplicando por 2 y despejando \( p \):
+
+\[
+p = \frac{U'(C_{\text{malo}})}{U'(C_{\text{bueno}})}.
+\]
+
+Esta ecuación muestra que el precio relativo del activo que paga en el estado malo está determinado por la razón de las utilidades marginales en cada estado. Si \( C_{\text{malo}} \) es menor que \( C_{\text{bueno}} \), entonces \( U'(C_{\text{malo}}) \) es mayor que \( U'(C_{\text{bueno}}) \), lo que implica que \( p < 1 \). Esto refleja que los individuos valoran menos los activos que pagan en el estado malo, lo cual está relacionado con la prima de riesgo en los mercados financieros.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ***b)***
+***Dado que el consumo en los dos estados es exógeno y los individuos son ex ante idénticos, \( p \) debe ajustarse hasta el punto en que sea un equilibrio en el que las tenencias de ambos activos por parte de los individuos sean cero. Resuelva la condición derivada en el inciso (a) para este valor de equilibrio de \( p \) en términos de \( \phi \), \( \lambda \), \( U'(1) \) y \( U'(1 - (\phi / \lambda)) \).***
+
+##### \textcolor{red}{RESPUESTA}
+En el inciso (a), se obtuvo la condición de equilibrio para el precio relativo del activo del estado malo:
+
+\[
+p = \frac{U'(C_{\text{malo}})}{U'(C_{\text{bueno}})}.
+\]
+
+Dado que el consumo en el estado bueno es exógenamente \( C_{\text{bueno}} = 1 \), y en el estado malo, los individuos afectados consumen:
+
+\[
+C_{\text{malo}} = 1 - \frac{\phi}{\lambda},
+\]
+
+podemos sustituir estos valores en la ecuación de equilibrio:
+
+\[
+p = \frac{U'(1 - \frac{\phi}{\lambda})}{U'(1)}.
+\]
+
+Este resultado implica que el precio relativo del activo del estado malo depende de la relación de las utilidades marginales en cada estado. Como \( U'(C) \) es decreciente, y \( C_{\text{malo}} < C_{\text{bueno}} \), se cumple que \( U'(C_{\text{malo}}) > U'(C_{\text{bueno}}) \), lo que implica que \( p < 1 \). Esto muestra que los activos del estado malo son menos valorados debido al riesgo asociado con ese estado.
+
+
+
+
+
+
+
+
+
+
+#### ***c)***
+***Encuentre \( \frac{\partial p}{\partial \lambda} \).***
+
+##### \textcolor{red}{RESPUESTA}
+Dado que en el inciso (b) obtuvimos la ecuación de equilibrio:
+
+\[
+p = \frac{U'(1 - \frac{\phi}{\lambda})}{U'(1)},
+\]
+
+derivamos con respecto a \( \lambda \):
+
+\[
+\frac{\partial p}{\partial \lambda} = \frac{U''(1 - \frac{\phi}{\lambda})}{U'(1)} \cdot \left( \frac{\partial}{\partial \lambda} \left( 1 - \frac{\phi}{\lambda} \right) \right).
+\]
+
+Calculamos la derivada del argumento:
+
+\[
+\frac{\partial}{\partial \lambda} \left( 1 - \frac{\phi}{\lambda} \right) = \frac{\phi}{\lambda^2}.
+\]
+
+Sustituyendo:
+
+\[
+\frac{\partial p}{\partial \lambda} = \frac{U''(1 - \frac{\phi}{\lambda})}{U'(1)} \cdot \frac{\phi}{\lambda^2}.
+\]
+
+Dado que \( U''(C) < 0 \) por la concavidad de la función de utilidad, se cumple que:
+
+\[
+\frac{\partial p}{\partial \lambda} < 0.
+\]
+
+Esto implica que cuando la fracción \( \lambda \) de la población afectada aumenta, el precio relativo \( p \) disminuye. Intuitivamente, esto sucede porque cuando más personas comparten el impacto del choque negativo, la diferencia entre \( C_{\text{bueno}} \) y \( C_{\text{malo}} \) es menor, reduciendo la prima de riesgo y disminuyendo el valor del activo en el estado malo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ***d)***
+***Demuestre que si la utilidad es cuadrática, entonces \( \frac{\partial p}{\partial \lambda} = 0 \).***
+
+##### \textcolor{red}{RESPUESTA}
+Para demostrar que si la utilidad es cuadrática entonces \( \frac{\partial p}{\partial \lambda} = 0 \), partimos de la ecuación obtenida en el inciso (b):
+
+\[
+p = \frac{U'(1 - \frac{\phi}{\lambda})}{U'(1)}.
+\]
+
+Derivando con respecto a \( \lambda \):
+
+\[
+\frac{\partial p}{\partial \lambda} = \frac{U''(1 - \frac{\phi}{\lambda})}{U'(1)} \cdot \frac{\phi}{\lambda^2}.
+\]
+
+Para que \( \frac{\partial p}{\partial \lambda} = 0 \), necesitamos que \( U''(C) = 0 \). Esto ocurre si la utilidad es cuadrática, es decir, si:
+
+\[
+U(C) = aC - \frac{b}{2} C^2.
+\]
+
+La primera derivada es:
+
+\[
+U'(C) = a - bC.
+\]
+
+La segunda derivada es:
+
+\[
+U''(C) = -b.
+\]
+
+Como \( U''(C) \) es constante e independiente de \( C \), entonces en la ecuación de \( \frac{\partial p}{\partial \lambda} \), el numerador es constante:
+
+\[
+\frac{\partial p}{\partial \lambda} = \frac{(-b)}{U'(1)} \cdot \frac{\phi}{\lambda^2} = 0.
+\]
+
+Esto demuestra que, bajo una utilidad cuadrática, la derivada de \( p \) respecto a \( \lambda \) es cero. Intuitivamente, esto significa que el riesgo agregado no afecta la prima de riesgo porque la aversión al riesgo es constante.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ***e)***
+***Demuestre que si \( U'''(\cdot) \) es positiva en todas partes, entonces \( \frac{\partial p}{\partial \lambda} < 0 \).***
+
+##### \textcolor{red}{RESPUESTA}
+Para demostrar que si \( U'''(C) > 0 \) en todas partes, entonces \( \frac{\partial p}{\partial \lambda} < 0 \), partimos de la ecuación obtenida en el inciso (b):
+
+\[
+p = \frac{U'(1 - \frac{\phi}{\lambda})}{U'(1)}.
+\]
+
+Derivamos con respecto a \( \lambda \):
+
+\[
+\frac{\partial p}{\partial \lambda} = \frac{U''(1 - \frac{\phi}{\lambda})}{U'(1)} \cdot \left( \frac{\partial}{\partial \lambda} \left( 1 - \frac{\phi}{\lambda} \right) \right).
+\]
+
+Calculamos la derivada del argumento:
+
+\[
+\frac{\partial}{\partial \lambda} \left( 1 - \frac{\phi}{\lambda} \right) = \frac{\phi}{\lambda^2}.
+\]
+
+Sustituyendo:
+
+\[
+\frac{\partial p}{\partial \lambda} = \frac{U''(1 - \frac{\phi}{\lambda})}{U'(1)} \cdot \frac{\phi}{\lambda^2}.
+\]
+
+Como sabemos que \( U''(C) \) es negativa debido a la concavidad de la utilidad, analizamos qué ocurre si \( U'''(C) > 0 \). Si la tercera derivada de la utilidad es positiva, esto significa que \( U''(C) \) es una función creciente en \( C \). Como \( 1 - \frac{\phi}{\lambda} < 1 \), se cumple que:
+
+\[
+U''(1 - \frac{\phi}{\lambda}) < U''(1).
+\]
+
+Dado que \( U''(C) \) es negativa, esto significa que:
+
+\[
+U''(1 - \frac{\phi}{\lambda}) / U'(1) < 0.
+\]
+
+Por lo tanto,
+
+\[
+\frac{\partial p}{\partial \lambda} < 0.
+\]
+
+Esto demuestra que cuando la utilidad marginal decrece a una tasa decreciente (es decir, \( U'''(C) > 0 \)), el precio relativo \( p \) disminuye cuando más individuos comparten el impacto del choque negativo en el estado malo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+## **Ejercicio 2 **
+Simule una variedad de agentes que tienen ingresos permanentes diferentes e ingresos transitorios diferentes y calcule la relación entre consumo e ingreso que resulta de hacer diversos supuestos para las varianzas de cada tipo de ingreso, por medio de los pasos siguientes:[2 horas, 1 punto cada inciso]
+
+### ***a)*** 
+***Cree un vector de 10 ingresos permanentes aleatorios \( Y_{P_i} \), distribuidos normalmente, con media 100 y varianza \( \sigma_P \).***  
+***Cree 20 vectores (cada uno de estos vectores representa una persona) cada uno con 30 observaciones idénticas del ingreso permanente.***  
+***Grafíquelos (eje x, persona; eje y, ingreso permanente).***
+
+```{r graf_ingresos, echo=FALSE, fig.cap="Ingresos permanentes por persona", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+
+# Parámetros del ejercicio
+set.seed(123)  # Para reproducibilidad
+n_individuos <- 20  # Número de individuos
+n_periodos <- 30  # Número de periodos por individuo
+sigma_P <- 15  # Desviación estándar del ingreso permanente
+
+# Generar ingresos permanentes para cada individuo
+ingresos_permanentes <- rnorm(n_individuos, mean = 100, sd = sigma_P)
+
+# Expandir los ingresos a 30 periodos por individuo
+df_permanente <- data.frame(
+  Individuo = rep(1:n_individuos, each = n_periodos),
+  Ingreso_Permanente = rep(ingresos_permanentes, each = n_periodos)
+)
+
+# Graficar ingresos permanentes
+graf_ingresos <- ggplot(df_permanente, aes(x = factor(Individuo), y = Ingreso_Permanente, group = Individuo)) +
+  geom_point(color = "blue", alpha = 0.6) +  
+  geom_line(aes(group = Individuo), color = "blue", alpha = 0.6) +  
+  geom_hline(yintercept = 100, linetype = "dashed", color = "red", size = 1) +  
+  labs(
+    title = "Ingresos Permanentes por Individuo",
+    x = "Individuo",
+    y = "Ingreso Permanente"
+  ) +
+  theme_minimal()
+
+# Mostrar la gráfica
+graf_ingresos
+```
+
+En esta sección generamos ingresos permanentes para cada individuo, manteniéndolos constantes a lo largo del tiempo. La gráfica resultante debe mostrar que cada individuo tiene un ingreso fijo durante los 30 periodos. Se observa que, aunque hay variabilidad en los ingresos entre individuos debido a la aleatoriedad en la simulación, la media se mantiene en 100, lo que confirma la correcta parametrización de la simulación.
+
+### ***b)*** 
+***Cree 10 vectores de 30 ingresos transitorios aleatorios \( Y_{i,t}^{T} \), distribuidos normalmente, con media 0 y con varianza \( \sigma^{T} \).***  
+***Grafíquelos.***
+
+```{r graf_ingresos_transitorios, echo=FALSE, fig.cap="Ingresos transitorios aleatorios", warning=FALSE, message=FALSE, fig.width=8, fig.height=5, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(scales)  # Para manejar mejor los breaks del eje Y
+
+# Parámetros
+sigma_T <- 15  # Desviación estándar del ingreso transitorio
+n_vectores_transitorios <- 10  # Número de vectores transitorios disponibles
+n_periodos <- 30  # Número de periodos
+n_individuos <- 20  # Número de individuos
+
+# Generar 10 vectores de ingresos transitorios (cada uno con 30 periodos)
+vectores_transitorios <- matrix(rnorm(n_vectores_transitorios * n_periodos, mean = 0, sd = sigma_T),
+                                nrow = n_vectores_transitorios, ncol = n_periodos)
+
+# Asignar aleatoriamente uno de estos vectores a cada persona
+set.seed(123)  # Para reproducibilidad
+asignaciones <- sample(1:n_vectores_transitorios, n_individuos, replace = TRUE)
+
+# Crear dataframe con ingresos transitorios asignados
+df_transitorio <- data.frame(
+  Individuo = rep(1:n_individuos, each = n_periodos),
+  Periodo = rep(1:n_periodos, times = n_individuos),
+  Ingreso_Transitorio = as.vector(vectores_transitorios[asignaciones, ])
+)
+
+# Graficar ingresos transitorios por individuo en gráficos separados
+graf_ingresos_transitorios <- ggplot(df_transitorio, aes(x = Periodo, y = Ingreso_Transitorio)) +
+  geom_line(color = "blue", alpha = 0.8) +  
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 0.7) +  
+  facet_wrap(~Individuo, ncol = 5, scales = "free_y") +  # Ajusta la escala Y por faceta
+  labs(
+    title = "Ingresos Transitorios Individuales",
+    x = "Periodo",
+    y = "Ingreso Transitorio"
+  ) +
+  scale_y_continuous(breaks = scales::breaks_extended(n = 3)) +  # Reduce el número de etiquetas en el eje Y
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 7, angle = 0, hjust = 0.5),  # Ajusta tamaño y rotación del eje Y
+    axis.text.x = element_text(size = 8),  # Tamaño del eje X
+    strip.text = element_text(size = 10, face = "bold"),  # Ajusta el tamaño de los títulos de cada faceta
+    panel.spacing = unit(1, "lines")  # Agrega más espacio entre gráficos
+  )
+
+# Mostrar la gráfica
+graf_ingresos_transitorios
+```
+
+Aquí modelamos ingresos transitorios, que fluctúan en cada periodo y se asignan aleatoriamente a los individuos. Dado que los ingresos transitorios tienen media cero, su efecto neto en la media de los ingresos totales debe ser neutral. La gráfica mostrará variaciones en los ingresos transitorios a lo largo del tiempo, destacando la volatilidad de estos ingresos en comparación con los ingresos permanentes.
+  
+
+
+### ***c)*** 
+***Cree 10 vectores de 20 ingresos totales \( Y_{i,t} \), sumando el ingreso transitorio y el permanente.***  
+***Grafíquelos.***
+
+```{r graf_ingresos_totales, echo=FALSE, fig.cap="Ingresos totales (permanente + transitorio)", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(scales)
+
+# Crear ingresos totales sumando los ingresos permanentes y transitorios
+df_transitorio$Ingreso_Total <- df_transitorio$Ingreso_Transitorio + rep(ingresos_permanentes, each = n_periodos)
+
+# Graficar ingresos totales por individuo con mejoras
+graf_ingresos_totales <- ggplot(df_transitorio, aes(x = Periodo, y = Ingreso_Total)) +
+  geom_smooth(method = "loess", span = 0.3, color = "blue", se = FALSE, size = 0.8) +  # Línea más delgada y curva más suave
+  facet_wrap(~Individuo, ncol = 5, scales = "free_y") +  # Ajusta la escala Y individualmente
+  labs(
+    title = "Evolución del Ingreso Total por Individuo",
+    x = "Periodo",
+    y = "Ingreso Total"
+  ) +
+  scale_y_continuous(breaks = scales::breaks_extended(n = 3)) +  # Reduce el número de etiquetas en el eje Y
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 7, angle = 0),  # Hace más pequeñas las etiquetas del eje Y
+    panel.spacing = unit(1, "lines")  # Agrega más espacio entre gráficos
+  )
+
+# Mostrar la gráfica
+graf_ingresos_totales
+
+
+```
+
+El ingreso total de cada individuo se obtiene como la suma del ingreso permanente y el transitorio. Debido a que el ingreso permanente es constante para cada individuo, cualquier variabilidad en el ingreso total proviene del ingreso transitorio. En la gráfica de ingresos totales se debe observar que los patrones siguen de cerca los ingresos permanentes, pero con fluctuaciones periódicas debidas a la naturaleza aleatoria del ingreso transitorio.
+
+### ***d)*** 
+***Cree 10 vectores de 20 errores de medición \( \epsilon_{i,t} \), distribuidos normalmente, con media 0 y varianza \( \sigma^{\epsilon} > 0 \).***  
+***Grafíquelos.***
+
+```{r graf_errores_medicion, echo=FALSE, fig.cap="Distribución de errores de medición (Violin Plot)", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+
+# Parámetros del ejercicio
+set.seed(123)  # Para reproducibilidad
+n_individuos <- 20  # Número de personas
+n_periodos <- 30  # Número de observaciones por individuo
+n_vectores_errores <- 10  # Número de vectores de error de medición
+sigma_epsilon <- 5  # Desviación estándar del error de medición
+
+# Generar 10 vectores de errores de medición (cada uno con 30 periodos)
+vectores_errores <- matrix(rnorm(n_vectores_errores * n_periodos, mean = 0, sd = sigma_epsilon),
+                           nrow = n_vectores_errores, ncol = n_periodos)
+
+# Asignar aleatoriamente un vector de error de medición a cada persona
+asignaciones_errores <- sample(1:n_vectores_errores, n_individuos, replace = TRUE)
+
+# Crear un dataframe con los errores de medición asignados
+df_errores <- data.frame(
+  Individuo = rep(1:n_individuos, each = n_periodos),
+  Periodo = rep(1:n_periodos, times = n_individuos),
+  Error_Medicion = as.vector(vectores_errores[asignaciones_errores, ])
+)
+
+# Graficar los errores de medición en gráficos individuales por persona
+graf_errores_medicion <- ggplot(df_errores, aes(x = Periodo, y = Error_Medicion)) +
+  geom_line(color = "purple", alpha = 0.8) +  # Línea de errores
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black", size = 0.7) +  # Línea en la media 0
+  facet_wrap(~Individuo, ncol = 5) +  # Organizar en múltiples columnas
+  labs(
+    title = "Errores de Medición Individuales",
+    x = "Periodo",
+    y = "Error de Medición"
+  ) +
+  theme_minimal()
+
+# Mostrar la gráfica
+graf_errores_medicion
+```
+
+Se introducen errores de medición en el consumo, los cuales están normalmente distribuidos con media cero. Estos errores representan problemas de observación o reporte en la medición del consumo. La gráfica de errores de medición debe mostrar fluctuaciones alrededor de cero, sin una tendencia clara, lo que indica que el error de medición es puramente aleatorio y no sistemático.
+
+### ***e)*** 
+***Cree 10 vectores de 20 consumos \( C_{i,t} \) cada uno, de acuerdo a la siguiente regla***  
+***\( C_{i,t} = Y_{i}^{P} + 0.1 Y_{i,t}^{T} + \epsilon_{i,t} \).***  
+***Grafíquelos.***
+
+```{r graf_consumo, echo=FALSE, fig.cap="Evolución del Consumo por Individuo", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(scales)
+
+# Verificar si df_errores y df_transitorio tienen las mismas dimensiones
+if (nrow(df_transitorio) != nrow(df_errores)) {
+  stop("Error: df_transitorio y df_errores tienen dimensiones diferentes.")
+}
+
+# Crear una copia de df_transitorio como base para df_consumo
+df_consumo <- df_transitorio  
+
+# Agregar ingresos permanentes
+df_consumo$Ingreso_Permanente <- rep(ingresos_permanentes, each = n_periodos)
+
+# Agregar errores de medición
+df_consumo$Error_Medicion <- df_errores$Error_Medicion  
+
+# Calcular consumo usando la regla dada
+df_consumo$Consumo <- df_consumo$Ingreso_Permanente + 
+                      0.1 * df_consumo$Ingreso_Transitorio + 
+                      df_consumo$Error_Medicion
+
+# Verificar si hay valores NA en df_consumo
+if (any(is.na(df_consumo$Consumo))) {
+  stop("Error: Hay valores NA en el consumo calculado. Revisa los datos de origen.")
+}
+
+# Graficar la evolución del consumo por individuo con líneas curvas y mejor diseño
+graf_consumo <- ggplot(df_consumo, aes(x = Periodo, y = Consumo)) +
+  geom_smooth(method = "loess", span = 0.3, color = "#800020", se = FALSE, size = 0.8) +  # Línea curva y más delgada
+  facet_wrap(~Individuo, ncol = 5, scales = "free_y") +  # Ajusta el eje Y por individuo
+  labs(
+    title = "Evolución del Consumo por Individuo",
+    x = "Periodo",
+    y = "Consumo"
+  ) +  
+  scale_y_continuous(breaks = scales::breaks_extended(n = 3)) +  # Reduce las etiquetas en el eje Y
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 7, angle = 0),  # Ajusta el tamaño y orientación del eje Y
+    panel.spacing = unit(1, "lines")  # Agrega más espacio entre gráficos
+  )
+
+# Mostrar la gráfica
+graf_consumo
+
+
+```
+
+El consumo se modela como una combinación del ingreso permanente, una fracción del ingreso transitorio y el error de medición. Dado que la relación entre el ingreso transitorio y el consumo es de 0.1, esto implica que los individuos suavizan su consumo y no gastan de manera proporcional al ingreso transitorio. La gráfica de consumo debe reflejar variaciones más suaves en comparación con los ingresos totales, lo que es consistente con la hipótesis de ingreso permanente. 
+
+
+### ***f)*** 
+***Estime la relación lineal entre ingreso total y consumo \( C_{i,t} = \alpha + \beta Y_{i,t} + \epsilon_{i,t} \).***  
+***Describa el resultado de su estimación y grafique la relación entre las observaciones del consumo y las del ingreso.***
+
+```{r graf_regresion, echo=FALSE, fig.cap="Relación entre Ingreso Total y Consumo", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+library(knitr)
+
+# Estimar la relación lineal entre consumo e ingreso total
+modelo <- lm(Consumo ~ Ingreso_Total, data = df_consumo)
+
+# Extraer coeficientes en una tabla
+coeficientes <- summary(modelo)$coefficients %>%
+  as.data.frame() %>%
+  tibble::rownames_to_column(var = "Parámetro")
+
+# Renombrar columnas
+colnames(coeficientes) <- c("Parámetro", "Estimación", "Error Estándar", "t-valor", "p-valor")
+
+# Agregar columna de significancia estadística
+coeficientes <- coeficientes %>%
+  mutate(Significativo = ifelse(`p-valor` < 0.05, "Sí", "No"))
+
+# Graficar la relación entre Consumo e Ingreso Total con la recta de regresión
+grafica <- ggplot(df_consumo, aes(x = Ingreso_Total, y = Consumo)) +
+  geom_point(alpha = 0.5, color = "blue") +  # Puntos de datos
+  geom_smooth(method = "lm", color = "red", se = FALSE) +  # Línea de regresión
+  labs(
+    title = "Relación entre Consumo e Ingreso Total",
+    x = "Ingreso Total",
+    y = "Consumo"
+  ) +
+  theme_minimal()
+
+# Mostrar tabla con kable y el gráfico juntos
+kable(coeficientes, caption = "Estimación del Modelo Lineal: Consumo vs Ingreso Total")
+
+print(grafica)
+```
+
+\[
+\text{Encontramos que } \hat{\beta} = 0.543929.
+\]
+Esto implica que un incremento de una unidad en el ingreso total se traduce en un aumento de **0.54** unidades en el consumo, lo que sugiere que los individuos no gastan inmediatamente todo su ingreso adicional, sino que **suavizan su consumo** a lo largo del tiempo. 
+
+Dado que el coeficiente estimado es **estadísticamente significativo**, podemos concluir que existe una relación clara entre el ingreso total y el consumo, aunque con una respuesta menor a uno. Este resultado es **consistente con la Hipótesis del Ingreso Permanente**, que plantea que los individuos ajustan su consumo en función de su ingreso esperado en el tiempo en lugar de reaccionar directamente a cambios transitorios en el ingreso.  
+
+
+
+### ***g)***  
+***Grafique la relación que resulta entre la \( \hat{\beta} \) estimada y la varianza \( \sigma^T \).*** 
+```{r graf_beta_varianza, echo=FALSE, fig.cap="Relación entre Beta estimada y la varianza del ingreso transitorio", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+library(ggplot2)
+library(dplyr)
+
+# Parámetros iniciales
+set.seed(123)  # Reproducibilidad
+n_individuos <- 20  
+n_periodos <- 30  
+sigma_P <- 15  # Desviación estándar del ingreso permanente
+sigma_T_vals <- seq(5, 50, by = 5)  # Diferentes valores de sigma_T
+sigma_epsilon <- 5  # Desviación estándar del error de medición
+
+# Generar ingresos permanentes para cada individuo
+ingresos_permanentes <- rnorm(n_individuos, mean = 100, sd = sigma_P)
+
+# Función para estimar beta para un dado sigma_T
+calcular_beta <- function(sigma_T) {
+  
+  # Generar ingresos transitorios
+  vectores_transitorios <- matrix(rnorm(n_individuos * n_periodos, mean = 0, sd = sigma_T), 
+                                  nrow = n_individuos, ncol = n_periodos)
+  
+  # Generar errores de medición
+  vectores_errores <- matrix(rnorm(n_individuos * n_periodos, mean = 0, sd = sigma_epsilon), 
+                             nrow = n_individuos, ncol = n_periodos)
+  
+  # Crear dataframe de simulación
+  df <- data.frame(
+    Individuo = rep(1:n_individuos, each = n_periodos),
+    Periodo = rep(1:n_periodos, times = n_individuos),
+    Ingreso_Permanente = rep(ingresos_permanentes, each = n_periodos),
+    Ingreso_Transitorio = as.vector(vectores_transitorios),
+    Error_Medicion = as.vector(vectores_errores)
+  )
+  
+  # Calcular ingreso total y consumo
+  df$Ingreso_Total <- df$Ingreso_Permanente + df$Ingreso_Transitorio
+  df$Consumo <- df$Ingreso_Permanente + 0.1 * df$Ingreso_Transitorio + df$Error_Medicion
+  
+  # Estimar regresión de consumo sobre ingreso total
+  modelo <- lm(Consumo ~ Ingreso_Total, data = df)
+  beta_hat <- coef(modelo)["Ingreso_Total"]
+  
+  return(beta_hat)
+}
+
+# Calcular beta para cada sigma_T
+resultados <- data.frame(
+  sigma_T = sigma_T_vals,
+  beta_hat = sapply(sigma_T_vals, calcular_beta)
+)
+
+# Graficar la relación entre beta estimada y sigma_T
+grafica_beta_sigma <- ggplot(resultados, aes(x = sigma_T, y = beta_hat)) +
+  geom_line(color = "blue") +
+  geom_point(color = "red") +
+  labs(
+    title = "Relación entre beta estimada y la varianza del ingreso transitorio",
+    x = "Desviación estándar del ingreso transitorio",
+    y = "Beta estimada"
+  ) +
+  theme_minimal()
+
+grafica_beta_sigma
+```
+
+En este inciso analizamos cómo cambia la estimación de \( \hat{\beta} \) cuando variamos la **desviación estándar del ingreso transitorio** (\(\sigma_T\)).
+
+La simulación nos muestra una relación **decreciente** entre \( \hat{\beta} \) y \(\sigma_T\). Es decir, a medida que aumenta la varianza del ingreso transitorio, el coeficiente estimado de la relación entre ingreso y consumo **disminuye**.
+
+Este resultado es intuitivo si consideramos que los individuos suavizan su consumo: cuando los ingresos transitorios son más volátiles, estos representan una **menor proporción del consumo total**, lo que reduce la sensibilidad del consumo al ingreso total. En términos formales, dado que el consumo se modela como:
+
+\[
+C_{it} = YP_i + 0.1 \cdot YT_{it} + \varepsilon_{it}
+\]
+
+cuando la varianza de \( YT_{it} \) aumenta, su efecto sobre el consumo se diluye porque el coeficiente **\(0.1\)** limita su impacto. Esto hace que la relación total entre ingreso y consumo parezca más débil.
+
+Por otro lado, podríamos pensar que un ingreso más volátil debería hacer que la relación sea más fuerte debido a un mayor efecto sobre el consumo. Sin embargo, esto no ocurre porque los individuos no consumen directamente todo su ingreso transitorio; en cambio, parte de este ingreso se ahorra o se destina a consumo en otros periodos. 
+
+El gráfico generado confirma esta predicción: conforme la varianza del ingreso transitorio aumenta, la estimación de \( \hat{\beta} \) disminuye sistemáticamente. 
+
+
+
+### ***h)***  
+***Grafique la relación que resulta entre la \( \hat{\beta} \) estimada y la varianza \( \sigma^\epsilon \).***  
+
+```{r graf_beta_varianza_error, echo=FALSE, fig.cap="Relación entre Beta estimada y la varianza del error de medición", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+
+# Parámetros iniciales
+set.seed(123)  # Reproducibilidad
+n_individuos <- 20  
+n_periodos <- 30  
+sigma_P <- 15  # Desviación estándar del ingreso permanente
+sigma_T <- 15  # Fijamos una desviación estándar del ingreso transitorio
+sigma_epsilon_vals <- seq(5, 50, by = 5)  # Diferentes valores de sigma_epsilon
+
+# Generar ingresos permanentes para cada individuo
+ingresos_permanentes <- rnorm(n_individuos, mean = 100, sd = sigma_P)
+
+# Generar ingresos transitorios fijos para todos los experimentos
+vectores_transitorios <- matrix(rnorm(n_individuos * n_periodos, mean = 0, sd = sigma_T), 
+                                nrow = n_individuos, ncol = n_periodos)
+
+# Función para estimar beta para un dado sigma_epsilon
+calcular_beta <- function(sigma_epsilon) {
+  
+  # Generar errores de medición
+  vectores_errores <- matrix(rnorm(n_individuos * n_periodos, mean = 0, sd = sigma_epsilon), 
+                             nrow = n_individuos, ncol = n_periodos)
+  
+  # Crear dataframe de simulación
+  df <- data.frame(
+    Individuo = rep(1:n_individuos, each = n_periodos),
+    Periodo = rep(1:n_periodos, times = n_individuos),
+    Ingreso_Permanente = rep(ingresos_permanentes, each = n_periodos),
+    Ingreso_Transitorio = as.vector(vectores_transitorios),
+    Error_Medicion = as.vector(vectores_errores)
+  )
+  
+  # Calcular ingreso total y consumo
+  df$Ingreso_Total <- df$Ingreso_Permanente + df$Ingreso_Transitorio
+  df$Consumo <- df$Ingreso_Permanente + 0.1 * df$Ingreso_Transitorio + df$Error_Medicion
+  
+  # Estimar regresión de consumo sobre ingreso total
+  modelo <- lm(Consumo ~ Ingreso_Total, data = df)
+  beta_hat <- coef(modelo)["Ingreso_Total"]
+  
+  return(beta_hat)
+}
+
+# Calcular beta para cada sigma_epsilon
+resultados <- data.frame(
+  sigma_epsilon = sigma_epsilon_vals,
+  beta_hat = sapply(sigma_epsilon_vals, calcular_beta)
+)
+
+# Graficar la relación entre beta estimada y sigma_epsilon
+graf_beta_varianza_error <- ggplot(resultados, aes(x = sigma_epsilon, y = beta_hat)) +
+  geom_line(color = "blue") +
+  geom_point(color = "red") +
+  labs(
+    title = "Relación entre Beta estimada y la varianza del error de medición",
+    x = "Desviación estándar del error de medición ",
+    y = "Beta estimada"
+  ) +
+  theme_minimal()
+
+# Mostrar la gráfica
+graf_beta_varianza_error
+
+```
+
+La gráfica muestra la relación entre la $\hat{\beta}$ estimada y la varianza del error de medición, $\sigma_{\varepsilon}$. 
+
+Se observa que para valores bajos de $\sigma_{\varepsilon}$, la $\hat{\beta}$ estimada es relativamente alta, lo que indica que el consumo está fuertemente relacionado con el ingreso total. Sin embargo, conforme $\sigma_{\varepsilon}$ aumenta, se aprecia una tendencia a la baja en la estimación de $\hat{\beta}$. 
+
+Este comportamiento se debe a que un mayor error de medición introduce ruido en la relación entre consumo e ingreso, lo que afecta la precisión de la estimación de la pendiente en la regresión. A medida que $\sigma_{\varepsilon}$ crece, la varianza adicional genera un sesgo en la relación estimada, reduciendo la fuerza de la asociación entre consumo e ingreso total.
+
+En otras palabras, mientras más grande sea la varianza del error de medición, más difícil es captar la relación real entre las variables, lo que disminuye la precisión del coeficiente estimado.
+
+## **Ejercicio 3 **
+Estudie el consumo agregado en México siguiendo estos pasos: [3 horas, 0.5 puntos
+cada inciso]
+
+### ***a)***
+***Obtenga, del Inegi, datos trimestrales de México, para \( C \), el consumo agregado, \( Cs \), el consumo agregado de servicios, \( Cb \), el consumo agregado de bienes, de \( Y \), el producto agregado, de \( I \), la inversión agregada, de \( G \), el gasto del gobierno, y de \( NX \), las exportaciones netas, entre 1980 y el tercer trimestre de 2024, EN TÉRMINOS REALES***.
+
+Los datos de las series de oferta y demanda del INEGI se obtuvieron a partir de distintas bases históricas y actuales para garantizar la continuidad desde 1980 hasta el tercer trimestre de 2024. Para cubrir el período solicitado, se consultaron las series descontinuadas que abarcan de **1980 a 2007**, expresadas a precios constantes de 1980, y la serie más reciente, disponible desde **1994 hasta 2024**, a precios constantes de 2018. Dado que el desglose del consumo en bienes y servicios no está disponible para todo el período, se recurrió a la desagregación de los agregados de **consumo privado y consumo de gobierno** en bienes y servicios respectivamente, información que solo se encuentra disponible a partir de **1993**.
+
+La integración de las bases de datos se realizó unificando dos series con diferentes períodos y unidades de medida. La base od_his, que contenía datos desde 1980 hasta 1995 en millones de pesos base 1980, fue ajustada para hacerla comparable con od_act, que abarcaba de 1993 a 2024 en millones de pesos base 2018. Para ello, se utilizó un deflactor del PIB con base 2018, permitiendo ajustar los valores de od_his a precios constantes de 2018. Posteriormente, se aplicó un factor de ajuste para garantizar que las observaciones coincidentes entre ambas bases (1993-1995) fueran consistentes, eliminando así discrepancias estructurales entre las series.
+
+El proceso de deflactación consistió en multiplicar cada variable de od_his por la razón del deflactor del período correspondiente entre el deflactor de 1980 T1. Esto permitió llevar todas las observaciones a términos homogéneos en base 2018. Posteriormente, se multiplicó por el factor de ajuste previamente calculado para garantizar la compatibilidad con od_act. Una vez ajustados los valores, se realizó la fusión de ambas bases de datos, asegurando que en los períodos superpuestos (1993-1995) se conservaran los datos de od_act, garantizando la consistencia en toda la serie de tiempo.
+
+En la denominación de las variables, se utilizó la nomenclatura estándar en macroeconomía. La inversión, conocida como formación bruta de capital fijo, se representó como "I". El consumo privado se denotó como "C", mientras que el gasto de gobierno se identificó como "G". La producción total, medida por el PIB, se nombró "Y". Las exportaciones netas, calculadas como la diferencia entre exportaciones e importaciones, se representaron como "XN". Estos ajustes y convenciones facilitaron el análisis de las series a lo largo del tiempo, asegurando una presentación clara y coherente de las variables económicas fundamentales.
+
+```{r cargar_bases, echo=FALSE}
+            # Consumo gobierno desglosado
+
+# Leer las bases de datos desde Excel
+od_his <- read_excel("od_global_bs_T180_T42007.xlsx", .name_repair = "minimal")  #Base 1980-1995 . Precios de 1980
+od_act <- read_excel("od_global_bs_T193_T32024.xlsx", .name_repair = "minimal")  #Base 1994-2024 . Precios de 2018
+cg <- read_excel("cg_desglosado_T1_T32024.xlsx", .name_repair = "minimal")
+cp <- read_excel("cp_desglosado_T194_T32024.xlsx", .name_repair = "minimal")
+```
+
+```{r nombrar_variables_od_his, echo=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+
+# Renombrar columnas con nombres más cortos y claros
+od_his <- od_his %>%
+  rename(
+    Y = "Series que ya no se actualizan > Oferta y demanda global de bienes y servicios, base 1980 y base 1993 > Series originales > Base 1980 > A precios constantes > Demanda > Total  /f2 (Millones de nuevos pesos a precios de 1980)  Trimestral",
+    C_privado = "Series que ya no se actualizan > Oferta y demanda global de bienes y servicios, base 1980 y base 1993 > Series originales > Base 1980 > A precios constantes > Demanda > Consumo privado  /f2 (Millones de nuevos pesos a precios de 1980)  Trimestral",
+    G = "Series que ya no se actualizan > Oferta y demanda global de bienes y servicios, base 1980 y base 1993 > Series originales > Base 1980 > A precios constantes > Demanda > Consumo de gobierno  /f2 (Millones de nuevos pesos a precios de 1980)  Trimestral",
+    I = "Series que ya no se actualizan > Oferta y demanda global de bienes y servicios, base 1980 y base 1993 > Series originales > Base 1980 > A precios constantes > Demanda > Formación bruta de capital fijo  /f2 (Millones de nuevos pesos a precios de 1980)  Trimestral",
+    variacion_existencias = "Series que ya no se actualizan > Oferta y demanda global de bienes y servicios, base 1980 y base 1993 > Series originales > Base 1980 > A precios constantes > Demanda > Variación de existencias  /f2 (Millones de nuevos pesos a precios de 1980)  Trimestral",
+    X = "Series que ya no se actualizan > Oferta y demanda global de bienes y servicios, base 1980 y base 1993 > Series originales > Base 1980 > A precios constantes > Demanda > Exportación de bienes y servicios  /f2 (Millones de nuevos pesos a precios de 1980)  Trimestral",
+    M = "Series que ya no se actualizan > Oferta y demanda global de bienes y servicios, base 1980 y base 1993 > Series originales > Base 1980 > A precios constantes > Oferta > Importación de bienes y servicios  /f2 (Millones de nuevos pesos a precios de 1980)  Trimestral"
+  )
+
+# Crear la variable C como la suma de Consumo privado y Consumo de gobierno
+od_his <- od_his %>%
+  mutate(C = C_privado + G)
+
+# Crear la columna de Exportaciones Netas (XN = X - M)
+od_his <- od_his %>%
+  mutate(XN = X - M)
+
+```
+
+```{r nombrar_variables_od_act, echo=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+
+# Renombrar columnas con nombres más cortos y claros para la base od_act
+od_act <- od_act %>%
+  rename(
+    M = "Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Oferta > Valores absolutos acumulados > Importaciones de bienes y servicios  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral",
+    Y = "Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Total  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral",
+    C_privado = "Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Consumo privado  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral",
+    G = "Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Consumo de gobierno  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral",
+    I = "Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Formación bruta de capital fijo  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral",
+    variacion_existencias = "Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Variación de existencias  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral",
+    X = "Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Exportaciones de bienes y servicios  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral"
+  )
+
+# Crear la variable C como la suma de Consumo privado y Consumo de gobierno
+od_act <- od_act %>%
+  mutate(C = C_privado + G)
+
+# Crear la columna de Exportaciones Netas (XN = X - M)
+od_act <- od_act %>%
+  mutate(XN = X - M)
+
+
+```
+
+```{r deflactor, echo=FALSE}
+
+# Cargar la base del deflactor del PIB
+deflactor <- read_excel("deflactor_pib_2024.xlsx")
+
+# Convertir Periodo de deflactor a formato "YYYY/QQ" para que coincida con od_act y od_his
+deflactor <- deflactor %>%
+  mutate(Periodo = str_replace(as.character(Periodo), "\\.", "/")) %>%
+  rename(Periods = Periodo)  # Renombrar para coincidir con od_act y od_his
+
+```
+
+```{r  1980_a_2018, echo=FALSE}
+# Ajustar todas las variables numéricas de od_his
+od_his_ajustado <- od_his %>%
+  left_join(deflactor, by = "Periods") %>%
+  mutate(across(where(is.numeric), ~ .x * (Trimestral / first(Trimestral)))) %>%
+  mutate(across(where(is.numeric), ~ .x * 15.02)) %>%  # Aplicar el factor de ajuste
+  select(-Trimestral)  # Eliminar la columna del deflactor
+
+```
+
+```{r merge_bases, echo=FALSE}
+
+# Fusionar od_his_ajustado con od_act
+od_agregado1980_2024 <- od_his_ajustado %>%
+  filter(!(Periods %in% od_act$Periods)) %>%  # Eliminar los períodos en común con od_act
+  bind_rows(od_act) %>%  # Unir con od_act
+  arrange(Periods)  # Ordenar por período
+
+od_agregado1980_2024 <- od_agregado1980_2024 %>% select(-Anual)
+od_agregado1980_2024 <- od_agregado1980_2024 %>% select(-variacion_existencias)
+```
+
+### ***b)***
+***Grafíque dichas series de tiempo juntas para compáralas visualmente. (Comparela gráfica de las variables (de las que son siempre positivas) en dos versiones: a)su valor real original, y b) después de sacarles el logaritmo natural).***
+
+```{r grafica_economia, echo=FALSE, fig.cap="Evolución de variables económicas (1980 - 2024). Datos ajustados a precios de 2018", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(scales) # Para mejorar la escala del eje Y
+
+# Extraer años de la columna "Periods"
+od_agregado1980_2024 <- od_agregado1980_2024 %>%
+  mutate(Año = as.numeric(str_sub(Periods, 1, 4))) # Extrae el año
+
+# Crear la gráfica con líneas de colores contrastantes
+grafica <- ggplot(od_agregado1980_2024, aes(x = Año)) +
+  # Líneas con colores bien diferenciados
+  geom_line(aes(y = Y, color = "Y"), size = 1.1) +
+  geom_line(aes(y = C, color = "C"), size = 1.1) +
+  geom_line(aes(y = G, color = "G"), size = 1.1) +
+  geom_line(aes(y = I, color = "I"), size = 1.1) +
+  geom_line(aes(y = XN, color = "XN"), size = 1.1) +
+
+  # Etiquetas de ejes y leyenda
+  labs(x = "Año",
+       y = "Cantidad (en millones)",
+       color = "Variable") + 
+
+  # Asignar colores contrastantes
+  scale_color_manual(values = c("Y" = "red", "C" = "blue", "G" = "green", "I" = "purple", "XN" = "orange")) +
+
+  # Ajustar el eje Y con notación más legible
+  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale())) +
+
+  # Ajuste del eje X (mostrar cada 5 años)
+  scale_x_continuous(breaks = seq(1980, 2024, by = 5)) +
+
+  # Tema limpio con fondo blanco
+  theme_classic() +
+
+  # Ajustes de texto y leyenda
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, color = "gray40"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    legend.position = "top",
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.text = element_text(size = 10)
+  )
+
+# Mostrar la gráfica
+grafica
+```
+
+```{r grafica_economia_logs, echo=FALSE, fig.cap="Evolución de variables económicas en logaritmos naturales (1980 - 2024). Datos ajustados a precios de 2018", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(scales) # Para mejorar la escala del eje Y
+
+# Extraer años de la columna "Periods"
+od_agregado1980_2024 <- od_agregado1980_2024 %>%
+  mutate(Año = as.numeric(str_sub(Periods, 1, 4))) # Extrae el año
+
+# Crear la gráfica con líneas de colores contrastantes en escala logarítmica
+grafica <- ggplot(od_agregado1980_2024, aes(x = Año)) +
+  # Líneas con valores en logaritmos naturales
+  geom_line(aes(y = log(Y), color = "Y"), size = 1.1) +
+  geom_line(aes(y = log(C), color = "C"), size = 1.1) +
+  geom_line(aes(y = log(G), color = "G"), size = 1.1) +
+  geom_line(aes(y = log(I), color = "I"), size = 1.1) +
+  geom_line(aes(y = log(XN), color = "XN"), size = 1.1) +
+
+  # Etiquetas de ejes y leyenda
+  labs(x = "Año",
+       y = "Logaritmo natural de la cantidad",
+       color = "Variable") + 
+
+  # Asignar colores contrastantes
+  scale_color_manual(values = c("Y" = "red", "C" = "blue", "G" = "green", "I" = "purple", "XN" = "orange")) +
+
+  # Ajustar el eje Y con valores en logaritmos naturales
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) +
+
+  # Ajuste del eje X (mostrar cada 5 años)
+  scale_x_continuous(breaks = seq(1980, 2024, by = 5)) +
+
+  # Tema limpio con fondo blanco
+  theme_classic() +
+
+  # Ajustes de texto y leyenda
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, color = "gray40"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    legend.position = "top",
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.text = element_text(size = 10)
+  )
+
+# Mostrar la gráfica
+grafica
+
+```
+
+La comparación entre las dos gráficas permite analizar tanto la **evolución absoluta** como la **relativa** de las variables económicas a lo largo del tiempo. En la **primera gráfica**, observamos los valores en niveles, donde la variable **Y (PIB) muestra un crecimiento sostenido**, mientras que **XN (exportaciones netas) exhibe fluctuaciones y valores negativos en algunos períodos**. 
+
+En la **segunda gráfica**, al transformar los datos a **logaritmos naturales**, se facilita la comparación de **tasas de crecimiento**, revelando que el **PIB, el consumo y la inversión han seguido trayectorias similares** en términos relativos. Sin embargo, la variable **XN presenta una trayectoria atípica** en la escala logarítmica debido a la presencia de **valores negativos**, lo que **afecta la interpretación directa de su evolución**. Este comportamiento refleja la **alta volatilidad** de las exportaciones netas y su impacto en la estructura económica, sugiriendo la **necesidad de un análisis más detallado** para entender los factores detrás de estos cambios.
+
+
+
+
+
+
+
+
+
+
+### ***c)***
+ **Construya las versiones “filtradas” (también llamadas “cíclicas” o “después de eliminar la tendencia”) de estas mismas series, de la siguiente forma:** Grafique la tasa de crecimiento,  
+\(\% \Delta a_t = \frac{a_t - a_{t-1}}{a_{t-1}}\), de todas estas series. Grafique la versión filtrada de las series, usando un **filtro HP** (la idea es tomar la llamada “parte cíclica”). Grafique la versión filtrada de las series, usando un **filtro Band-Pass**. Compare estas distintas formas de eliminar la tendencia.
+
+```{r tasa_crecimiento, echo=FALSE, fig.cap="Tasa de crecimiento de las variables económicas (1980 - 2024)", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(scales)
+
+# Definir un umbral para filtrar valores extremos
+threshold <- 200  # Filtramos tasas de crecimiento mayores a 200%
+
+# Calcular la tasa de crecimiento porcentual
+od_agregado1980_2024 <- od_agregado1980_2024 %>%
+  arrange(Año) %>%  # Asegurar el orden correcto de los datos
+  mutate(
+    Y_crec = (Y - lag(Y)) / lag(Y) * 100,
+    C_crec = (C - lag(C)) / lag(C) * 100,
+    G_crec = (G - lag(G)) / lag(G) * 100,
+    I_crec = (I - lag(I)) / lag(I) * 100,
+    XN_crec = ifelse(abs((XN - lag(XN)) / lag(XN) * 100) > threshold, NA, (XN - lag(XN)) / lag(XN) * 100) # Filtrar outliers
+  )
+
+# Crear la gráfica de tasas de crecimiento
+grafica_crec <- ggplot(od_agregado1980_2024, aes(x = Año)) +
+  geom_line(aes(y = Y_crec, color = "Y"), size = 1) +
+  geom_line(aes(y = C_crec, color = "C"), size = 1) +
+  geom_line(aes(y = G_crec, color = "G"), size = 1) +
+  geom_line(aes(y = I_crec, color = "I"), size = 1) +
+  geom_line(aes(y = XN_crec, color = "XN"), size = 1) +
+
+  # Etiquetas de ejes y leyenda
+  labs(x = "Año",
+       y = "Tasa de crecimiento (%)",
+       color = "Variable") + 
+
+  # Asignar colores contrastantes
+  scale_color_manual(values = c("Y" = "red", "C" = "blue", "G" = "green", "I" = "purple", "XN" = "orange")) +
+
+  # Limitar el eje Y para mejor visualización
+  scale_y_continuous(limits = c(-100, 100)) +
+
+  # Ajuste del eje X (mostrar cada 5 años)
+  scale_x_continuous(breaks = seq(1980, 2024, by = 5)) +
+
+  # Tema limpio con fondo blanco
+  theme_classic() +
+
+  # Ajustes de texto y leyenda
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, color = "gray40"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    legend.position = "top",
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.text = element_text(size = 10)
+  )
+
+# Mostrar la gráfica
+grafica_crec
+
+```
+
+La gráfica muestra la tasa de crecimiento de las principales variables macroeconómicas en el período 1980-2024. Se observa que las series presentan fluctuaciones significativas, reflejando los ciclos económicos y eventos de crisis. La variable **Y (PIB)** exhibe tasas de crecimiento relativamente estables con periodos de expansión y contracción. **C (consumo privado)** y **G (gasto del gobierno)** siguen patrones similares, aunque con menor volatilidad. **I (inversión)** muestra variaciones más marcadas, lo cual es consistente con su naturaleza procíclica. La variable **XN (exportaciones netas)** tenía valores extremadamente altos en la versión original debido a que su denominador en la fórmula de crecimiento podía acercarse a cero, generando tasas anómalas. Para mejorar la visualización, se implementó un filtro que omite tasas de crecimiento mayores a 200% en valor absoluto, permitiendo una interpretación más clara de las tendencias sin perder la valiosa información sobre su evolución.
+
+
+```{r filtro_hp, echo=FALSE, fig.cap="Ciclo económico extraído con el filtro de Hodrick-Prescott (HP)", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(scales)
+library(mFilter) # Para aplicar el filtro HP
+
+# Aplicar el filtro Hodrick-Prescott (lambda = 1600 para datos trimestrales)
+od_agregado1980_2024 <- od_agregado1980_2024 %>%
+  mutate(
+    Y_HP = hpfilter(Y, freq = 1600)$cycle,
+    C_HP = hpfilter(C, freq = 1600)$cycle,
+    G_HP = hpfilter(G, freq = 1600)$cycle,
+    I_HP = hpfilter(I, freq = 1600)$cycle,
+    XN_HP = hpfilter(XN, freq = 1600)$cycle
+  )
+
+# Crear la gráfica de la parte cíclica extraída con HP
+grafica_hp <- ggplot(od_agregado1980_2024, aes(x = Año)) +
+  geom_line(aes(y = Y_HP, color = "Y"), size = 1) +
+  geom_line(aes(y = C_HP, color = "C"), size = 1) +
+  geom_line(aes(y = G_HP, color = "G"), size = 1) +
+  geom_line(aes(y = I_HP, color = "I"), size = 1) +
+  geom_line(aes(y = XN_HP, color = "XN"), size = 1) +
+
+  # Etiquetas de ejes y leyenda
+  labs(x = "Año",
+       y = "Componente cíclico (en millones)",
+       color = "Variable") + 
+
+  # Asignar colores contrastantes
+  scale_color_manual(values = c("Y" = "red", "C" = "blue", "G" = "green", "I" = "purple", "XN" = "orange")) +
+
+  # Expresar el eje Y en millones para mayor legibilidad
+  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +
+
+  # Ajuste del eje X (mostrar cada 5 años)
+  scale_x_continuous(breaks = seq(1980, 2024, by = 5)) +
+
+  # Tema limpio con fondo blanco
+  theme_classic() +
+
+  # Ajustes de texto y leyenda
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, color = "gray40"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    legend.position = "top",
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.text = element_text(size = 10)
+  )
+
+# Mostrar la gráfica
+grafica_hp
+
+```
+
+La gráfica muestra el **componente cíclico** de las principales variables económicas, obtenido mediante el **filtro de Hodrick-Prescott (HP)**. En el eje **X** se representa el tiempo en años, mientras que en el eje **Y** se muestran las desviaciones de cada variable respecto a su tendencia de largo plazo, expresadas en **millones de pesos** para facilitar la interpretación. Los valores positivos indican que la variable está **por encima de su tendencia**, mientras que los valores negativos reflejan **una contracción respecto a la tendencia esperada**. Se observa que el **PIB (Y) y el Consumo (C) presentan ciclos similares**, reflejando la dinámica de expansión y contracción de la economía. La **Inversión (I) muestra una mayor volatilidad**, lo cual es consistente con su naturaleza procíclica. Por otro lado, las **exportaciones netas (XN) presentan fluctuaciones más irregulares**, reflejando su sensibilidad a factores externos como el comercio internacional y los tipos de cambio. Esta representación permite analizar los ciclos económicos sin la interferencia del crecimiento estructural de largo plazo.
+
+```{r filtro_bp, echo=FALSE, fig.cap="Ciclo económico extraído con el filtro Band-Pass (BP)", warning=FALSE, message=FALSE, fig.width=6, fig.height=3.5, fig.pos="t"}
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(scales)
+library(mFilter) # Para aplicar el filtro Band-Pass
+
+# Aplicar el filtro Band-Pass (BP) para extraer ciclos entre 2 y 8 años
+od_agregado1980_2024 <- od_agregado1980_2024 %>%
+  mutate(
+    Y_BP = bkfilter(Y, pl = 8, pu = 32, nfix = 12)$cycle, 
+    C_BP = bkfilter(C, pl = 8, pu = 32, nfix = 12)$cycle,
+    G_BP = bkfilter(G, pl = 8, pu = 32, nfix = 12)$cycle,
+    I_BP = bkfilter(I, pl = 8, pu = 32, nfix = 12)$cycle,
+    XN_BP = bkfilter(XN, pl = 8, pu = 32, nfix = 12)$cycle
+  )
+
+# Crear la gráfica de la parte cíclica extraída con Band-Pass
+grafica_bp <- ggplot(od_agregado1980_2024, aes(x = Año)) +
+  geom_line(aes(y = Y_BP, color = "Y"), size = 1) +
+  geom_line(aes(y = C_BP, color = "C"), size = 1) +
+  geom_line(aes(y = G_BP, color = "G"), size = 1) +
+  geom_line(aes(y = I_BP, color = "I"), size = 1) +
+  geom_line(aes(y = XN_BP, color = "XN"), size = 1) +
+
+  # Etiquetas de ejes y leyenda
+  labs(x = "Año",
+       y = "Componente cíclico (en millones)",
+       color = "Variable") + 
+
+  # Asignar colores contrastantes
+  scale_color_manual(values = c("Y" = "red", "C" = "blue", "G" = "green", "I" = "purple", "XN" = "orange")) +
+
+  # Expresar el eje Y en millones para mayor legibilidad
+  scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M")) +
+
+  # Ajuste del eje X (mostrar cada 5 años)
+  scale_x_continuous(breaks = seq(1980, 2024, by = 5)) +
+
+  # Tema limpio con fondo blanco
+  theme_classic() +
+
+  # Ajustes de texto y leyenda
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12, color = "gray40"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    legend.position = "top",
+    legend.title = element_text(size = 12, face = "bold"),
+    legend.text = element_text(size = 10)
+  )
+
+# Mostrar la gráfica
+grafica_bp
+```
+
+La gráfica muestra el **componente cíclico** de las principales variables económicas utilizando el **filtro Band-Pass (BP)**, el cual extrae las fluctuaciones cíclicas de **mediano plazo**, eliminando tanto la tendencia de largo plazo como la volatilidad de corto plazo. En el eje **X**, se representa el tiempo en años, mientras que en el eje **Y**, se muestran las desviaciones de cada variable respecto a su tendencia, expresadas en **millones de pesos**. Se observa que el **PIB (Y) y el Consumo (C) presentan ciclos más pronunciados**, mientras que la **Inversión (I) y las Exportaciones Netas (XN) exhiben fluctuaciones más abruptas y volátiles**, lo que refleja su sensibilidad a choques económicos. A diferencia del filtro HP, el **filtro Band-Pass enfatiza las oscilaciones recurrentes dentro de un rango específico de duración**, permitiendo una mejor identificación de los **ciclos económicos predominantes** en la serie.
+
+
+Las tres gráficas representan diferentes métodos de filtrado para analizar los ciclos económicos de las principales variables macroeconómicas. La primera gráfica, basada en la **tasa de crecimiento**, transforma las series en términos relativos, eliminando la tendencia de largo plazo y resaltando las fluctuaciones interanuales. Sin embargo, este método es sensible a variaciones extremas cuando el denominador es cercano a cero, lo que puede generar valores atípicos que dificultan la interpretación. La segunda gráfica, obtenida mediante el **filtro de Hodrick-Prescott (HP)**, separa la tendencia del componente cíclico, permitiendo observar desviaciones respecto a la trayectoria esperada de cada variable. Aunque este filtro es ampliamente utilizado en macroeconomía, su principal limitación es la dependencia del parámetro lambda, el cual afecta la suavidad de la tendencia extraída.
+
+Por otro lado, la tercera gráfica, obtenida mediante el **filtro Band-Pass (BP)**, enfoca su análisis en las fluctuaciones cíclicas dentro de un rango de frecuencia específico, eliminando tanto las tendencias de largo plazo como la volatilidad de corto plazo. Este método es útil para identificar **ciclos de mediano plazo**, como los ciclos económicos tradicionales, pero puede generar distorsiones en los extremos de la serie debido a su construcción. En términos de aplicación, el filtro HP es el más flexible y ampliamente utilizado para analizar ciclos económicos generales, mientras que el filtro BP es más útil para estudios específicos sobre duraciones de ciclos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+### ***d)***
+***Enfóquese ahora nada más a las distintas partes del consumo y al producto agregado. Grafique la relación entre cada una de las series del consumo y la del producto, es decir, grafique los puntos \(\% \Delta Y, \% \Delta C\) poniendo el consumo en el eje \(x\), para cada tipo de consumo.***
+```{r filtrar_consumo, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar paquetes necesarios
+library(dplyr)
+library(readxl)
+
+# Cargar la base de datos desde un archivo Excel
+c_bys_2003_2024 <- read_excel("c_bys_2003_2024.xlsx", sheet = 1)
+
+# Convertir todas las columnas a numérico (excepto Periods)
+c_bys_2003_2024 <- c_bys_2003_2024 %>%
+  mutate(across(-Periods, as.numeric))
+
+# Filtrar la base solo con las columnas de interés
+consumo_filtrado <- c_bys_2003_2024 %>%
+  select(
+    Periods,
+    `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Bienes duraderos  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+    `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Bienes semi duraderos  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+    `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Bienes no duraderos  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+    `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Servicios  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+    starts_with("Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo de gobierno general")
+  ) %>%
+  filter(Periods >= 2003 & Periods <= 2024) %>%
+  rename(
+    Bienes_duraderos = `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Bienes duraderos  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+    Bienes_semi_duraderos = `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Bienes semi duraderos  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+    Bienes_no_duraderos = `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Bienes no duraderos  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+    Servicios_privados = `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Servicios  /f1 (Millones de pesos a precios de 2018.)  Anual`
+  ) %>%
+  # Convertir todas las columnas relevantes a numérico
+  mutate(across(where(is.character), as.numeric)) %>%
+  # Crear categorías agregadas
+  mutate(
+    Consumo_bienes = Bienes_duraderos + Bienes_semi_duraderos + Bienes_no_duraderos + 
+                     rowSums(select(., 6:12), na.rm = TRUE),  # Sumar los bienes de gobierno
+    Consumo_servicios = Servicios_privados + rowSums(select(., 13:24), na.rm = TRUE), # Sumar los servicios de gobierno
+    Consumo_privado = Consumo_bienes + Servicios_privados,
+    Consumo_gobierno = rowSums(select(., 6:24), na.rm = TRUE), # Sumar todo el consumo del gobierno
+    Consumo_agregado = Consumo_privado + Consumo_gobierno
+  ) %>%
+  # Seleccionar solo las columnas finales de interés
+  select(Periods, Consumo_privado, Consumo_gobierno, Consumo_bienes, Consumo_servicios, Consumo_agregado)
+
+```
+
+```{r grafica_consumo_producto, echo=FALSE, fig.cap="Relación entre la tasa de crecimiento del producto agregado y del consumo (2003 - 2024)", warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.pos="t"}
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Agregar una columna de año a la base trimestral (od_agregado1980_2024)
+od_agregado1980_2024 <- od_agregado1980_2024 %>%
+  mutate(Año = as.numeric(substr(Periods, 1, 4)))
+
+# Calcular PIB anual promediando los valores trimestrales de cada año
+od_anual <- od_agregado1980_2024 %>%
+  group_by(Año) %>%
+  summarise(Y = mean(Y, na.rm = TRUE)) %>%
+  filter(Año >= 2003 & Año <= 2024)  # Mantener solo los años relevantes
+
+# Unir las bases de datos (consumo_filtrado y od_anual)
+datos_merged <- consumo_filtrado %>%
+  mutate(Año = Periods) %>%
+  left_join(od_anual, by = "Año") %>%
+  arrange(Año)
+
+# Calcular tasas de crecimiento anual (%Δ)
+datos_merged <- datos_merged %>%
+  mutate(
+    dY = 100 * (Y / lag(Y) - 1),
+    `Consumo Privado` = 100 * (Consumo_privado / lag(Consumo_privado) - 1),
+    `Consumo de Gobierno` = 100 * (Consumo_gobierno / lag(Consumo_gobierno) - 1),
+    `Consumo de Bienes` = 100 * (Consumo_bienes / lag(Consumo_bienes) - 1),
+    `Consumo de Servicios` = 100 * (Consumo_servicios / lag(Consumo_servicios) - 1),
+    `Consumo Agregado` = 100 * (Consumo_agregado / lag(Consumo_agregado) - 1)
+  ) %>%
+  drop_na() # Eliminar primeros valores perdidos por tasas de crecimiento
+
+# Transformar a formato largo para ggplot
+datos_long <- datos_merged %>%
+  select(Año, dY, `Consumo Privado`, `Consumo de Gobierno`, `Consumo de Bienes`, `Consumo de Servicios`, `Consumo Agregado`) %>%
+  pivot_longer(cols = -c(Año, dY), names_to = "Consumo", values_to = "dC")
+
+# Asignar colores a cada tipo de consumo
+colores_consumo <- c(
+  "Consumo Privado" = "blue",
+  "Consumo de Gobierno" = "red",
+  "Consumo de Bienes" = "green",
+  "Consumo de Servicios" = "purple",
+  "Consumo Agregado" = "orange"
+)
+
+# Crear gráfica de dispersión con líneas de tendencia del mismo color para bienes y servicios
+grafica <- ggplot(datos_long, aes(x = dC, y = dY, color = Consumo)) +
+  geom_point(size = 2, alpha = 0.7) +  # Solo puntos de dispersión
+  
+  # Líneas de tendencia SOLO para bienes y servicios (mismo color que los puntos)
+  geom_smooth(data = filter(datos_long, Consumo %in% c("Consumo de Bienes", "Consumo de Servicios")), 
+              aes(x = dC, y = dY, color = Consumo), method = "lm", size = 0.6, linetype = "solid", se = FALSE) +
+
+  # Etiquetas y colores
+  labs(x = "Tasa de crecimiento del consumo (%)",
+       y = "Tasa de crecimiento del PIB (%)",
+       color = "Tipo de Consumo") +
+  
+  scale_color_manual(values = colores_consumo) +
+  
+  theme_classic() +
+  theme(legend.position = "top")
+
+# Mostrar la gráfica al final del chunk
+grafica
+```
+
+La gráfica muestra la relación entre la **tasa de crecimiento del producto agregado (\(Y\))** y las tasas de crecimiento de distintas categorías de consumo en México entre **2003 y 2024**. Se observa una **correlación positiva** entre el crecimiento del consumo y el crecimiento del PIB, con mayor alineación en el **consumo de bienes y servicios**. Las líneas de tendencia resaltan esta relación, siendo **más marcada en el consumo de bienes**. Sin embargo, el **consumo de gobierno presenta una mayor dispersión**, lo que sugiere una relación menos estable con el crecimiento del PIB.
+
+### ***e)***
+***Calcule la volatilidad de las tasas de crecimiento. ¿Qué es más volátil, el ingreso o el consumo agregado? ¿Cuál de los consumos?***
+
+
+```{r tabla_volatilidad, result='asis', echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar paquetes necesarios
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+
+# Calcular varianza y desviación estándar para cada tasa de crecimiento
+volatilidad <- datos_merged %>%
+  summarise(
+    `PIB (Y)` = c(var(dY, na.rm = TRUE), sd(dY, na.rm = TRUE)),
+    `Consumo Agregado` = c(var(`Consumo Agregado`, na.rm = TRUE), sd(`Consumo Agregado`, na.rm = TRUE)),
+    `Consumo de Bienes` = c(var(`Consumo de Bienes`, na.rm = TRUE), sd(`Consumo de Bienes`, na.rm = TRUE)),
+    `Consumo de Servicios` = c(var(`Consumo de Servicios`, na.rm = TRUE), sd(`Consumo de Servicios`, na.rm = TRUE)),
+    `Consumo de Gobierno` = c(var(`Consumo de Gobierno`, na.rm = TRUE), sd(`Consumo de Gobierno`, na.rm = TRUE))
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Valores") %>%
+  mutate(Métrica = rep(c("Varianza", "Desviación estándar"), length.out = n())) %>%
+  pivot_wider(names_from = "Métrica", values_from = "Valores")
+
+# Crear tabla en formato LaTeX con tamaño más grande
+tabla_volatilidad <- volatilidad %>%
+  kable(format = "latex", booktabs = TRUE, digits = 6,
+        col.names = c("Variable", "Varianza", "Desviación estándar"),
+        caption = "Volatilidad de las tasas de crecimiento del PIB y el consumo (2003 - 2024)") %>%
+  kable_styling(latex_options = c("hold_position", "striped"), 
+                font_size = 12, full_width = TRUE, position = "center")
+
+# Mostrar la tabla al final del chunk
+tabla_volatilidad
+
+```
+
+A partir de la tabla de volatilidad de las tasas de crecimiento, se observa que el **PIB (Y) y el Consumo de Bienes presentan la mayor varianza y desviación estándar**, lo que indica que son las variables más volátiles dentro del análisis. En particular, el **Consumo de Servicios muestra una volatilidad considerablemente alta**, reflejada en su desviación estándar de **17.11**, superando incluso a la del PIB. Por otro lado, el **Consumo de Gobierno es el componente menos volátil**, lo que era esperable dada su naturaleza más estable y su menor sensibilidad a fluctuaciones económicas. Un hallazgo interesante es que el **Consumo Agregado es menos volátil que el PIB**, lo que sugiere que, aunque el consumo reacciona a las variaciones económicas, lo hace con menor intensidad en comparación con el ingreso total. En términos macroeconómicos, esto podría interpretarse como evidencia de **suavización del consumo**, es decir, los agentes económicos intentan mantener niveles de gasto relativamente estables a lo largo del tiempo, incluso ante fluctuaciones en el PIB.
+
+
+
+
+
+
+
+
+
+### ***f)***
+***Para cada uno de los tipos de consumo, estime cuatro modelos lineales:\[C_t = a + bY_t + \epsilon_t, \quad \Delta \%C_t = a + b\Delta \%Y_t + \epsilon_t, \quad \Delta \%C_t = a + b\Delta \%Y_{t-1} + \epsilon_t, \quad c_t = a + by_t + \epsilon_t,\]donde las minúsculas reflejan el logaritmo de la variable en mayúscula, y reporte los valores estimados de los coeficientes, los estadísticos \( T \), las \( R^2 \) cuadradas, etc.***
+
+
+```{r grafica_modelo1_nivel, echo=FALSE, fig.cap="Relación entre el PIB y los diferentes tipos de consumo: Modelo 1", warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.pos="H"}
+
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(patchwork)  # Para organizar múltiples gráficos
+library(scales)     # Para mejorar etiquetas en los ejes
+
+# Definir los modelos lineales para cada tipo de consumo
+modelos_nivel <- list(
+  "Consumo de Bienes" = lm(Consumo_bienes ~ Y, data = datos_merged),
+  "Consumo de Servicios" = lm(Consumo_servicios ~ Y, data = datos_merged),
+  "Consumo Privado" = lm(Consumo_privado ~ Y, data = datos_merged),
+  "Consumo de Gobierno" = lm(Consumo_gobierno ~ Y, data = datos_merged)
+)
+
+# Función para generar gráficos de regresión lineal con valores más amigables
+graficar_modelo <- function(variable_consumo, nombre_consumo) {
+  ggplot(datos_merged, aes(x = Y, y = .data[[variable_consumo]])) +
+    geom_point(color = "black", alpha = 0.7) + 
+    geom_smooth(method = "lm", color = "blue", se = TRUE) +  
+    labs(x = "PIB (Y) en Millones de Pesos", y = nombre_consumo) +
+    
+    # Escalar los ejes para mostrar valores en millones
+    scale_x_continuous(labels = label_number(scale = 1e-6, suffix = "M")) +
+    scale_y_continuous(labels = label_number(scale = 1e-6, suffix = "M")) +
+    
+    theme_classic()
+}
+
+# Crear gráficos para cada tipo de consumo
+g1 <- graficar_modelo("Consumo_bienes", "Consumo de Bienes")
+g2 <- graficar_modelo("Consumo_servicios", "Consumo de Servicios")
+g3 <- graficar_modelo("Consumo_privado", "Consumo Privado")
+g4 <- graficar_modelo("Consumo_gobierno", "Consumo de Gobierno")
+
+# Organizar los gráficos en una cuadrícula 2x2 con patchwork
+grafica <- (g1 | g2) / (g3 | g4)
+
+# Mostrar la gráfica al final del chunk
+grafica
+
+
+```
+
+```{r tabla_modelo_nivel, result='asis', echo=FALSE, message=FALSE, warning=FALSE}
+
+# Cargar paquetes necesarios
+library(broom)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# Aplicar la función `tidy()` de `broom` para extraer coeficientes, T-estadísticos y p-valores
+resultados_modelo <- lapply(modelos_nivel, function(modelo) {
+  resumen <- summary(modelo)
+  tidy(modelo) %>%
+    mutate(
+      R2 = resumen$r.squared,                # R cuadrada
+      R2_ajustada = resumen$adj.r.squared,   # R cuadrada ajustada
+      AIC = AIC(modelo)                      # Criterio de información de Akaike
+    )
+})
+
+# Convertir la lista en un dataframe
+tabla_resultados <- bind_rows(resultados_modelo, .id = "Modelo") %>%
+  select(Modelo, term, estimate, std.error, statistic, p.value, R2, R2_ajustada, AIC) %>%
+  rename(
+    Variable = term,
+    Coeficiente = estimate,
+    `Error estándar` = std.error,
+    `Estadístico T` = statistic,
+    `P-valor` = p.value,
+    `R²` = R2,
+    `R² Ajustado` = R2_ajustada
+  )
+
+# Formatear la tabla en LaTeX con `kableExtra`
+tabla_latex <- tabla_resultados %>%
+  knitr::kable(
+    format = "latex",
+    booktabs = TRUE,
+    digits = 4,
+    caption = "Resultados de regresión del Modelo 1: Consumo y PIB",
+    align = "c"
+  ) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down"), 
+                position = "center", font_size = 9, full_width = FALSE) %>%
+
+  # Mejorar encabezados
+  add_header_above(c(" " = 1, "Parámetros Estimados" = 4, "Bondad de Ajuste" = 3)) %>%
+
+  # Resaltar nombres de los modelos en negrita
+  row_spec(0, bold = TRUE)
+
+# Mostrar la tabla
+tabla_latex
+
+```
+
+\clearpage
+
+**Resultados del Modelo 1:** La relación estimada entre el PIB y los distintos tipos de consumo confirma una **relación positiva y significativa** en todos los casos. El **consumo privado es el más dependiente del PIB** con un \( R^2 \) de 0.9882, lo que indica que **casi toda su variabilidad es explicada por el ingreso agregado**. El **consumo de bienes también muestra una fuerte dependencia**, mientras que el **consumo de servicios y de gobierno tienen menor \( R^2 \)**, lo que sugiere que otros factores pueden influir en su comportamiento. En particular, el **consumo de gobierno presenta el ajuste más bajo**, reflejando que **su variación no responde únicamente al PIB, sino también a decisiones de política fiscal y gasto público**.
+
+```{r grafica_modelo_tasas, echo=FALSE, fig.cap="Relación entre la tasa de crecimiento del PIB y los diferentes tipos de consumo: Modelo 2", warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.pos="ht"}
+
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(patchwork)  # Para organizar múltiples gráficos
+
+# Calcular tasas de crecimiento anual (%ΔY y %ΔC)
+datos_merged <- datos_merged %>%
+  mutate(
+    dY = 100 * (Y / lag(Y) - 1),  # Tasa de crecimiento del PIB
+    dC_Bienes = 100 * (Consumo_bienes / lag(Consumo_bienes) - 1),
+    dC_Servicios = 100 * (Consumo_servicios / lag(Consumo_servicios) - 1),
+    dC_Privado = 100 * (Consumo_privado / lag(Consumo_privado) - 1),
+    dC_Gobierno = 100 * (Consumo_gobierno / lag(Consumo_gobierno) - 1)
+  ) %>%
+  drop_na()  # Eliminar valores perdidos generados por el cálculo de tasas
+
+# Definir modelos lineales para cada tipo de consumo con tasas de crecimiento
+modelos_tasa <- list(
+  "Bienes" = lm(dC_Bienes ~ dY, data = datos_merged),
+  "Servicios" = lm(dC_Servicios ~ dY, data = datos_merged),
+  "Privado" = lm(dC_Privado ~ dY, data = datos_merged),
+  "Gobierno" = lm(dC_Gobierno ~ dY, data = datos_merged)
+)
+
+# Función para generar gráficos con etiquetas más compactas
+graficar_modelo_tasa <- function(variable_consumo, nombre_consumo) {
+  ggplot(datos_merged, aes(x = dY, y = .data[[variable_consumo]])) +
+    geom_point(color = "black", alpha = 0.7) + 
+    geom_smooth(method = "lm", color = "blue", se = TRUE) +  
+    labs(x = "Tasa de crecimiento del PIB (%)", 
+         y = paste0("Δ% ", nombre_consumo)) +  # Etiquetas más cortas
+    scale_x_continuous(labels = scales::percent_format(scale = 1)) +  
+    scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+    theme_classic()
+}
+
+# Crear gráficos con etiquetas abreviadas
+g1_tasa <- graficar_modelo_tasa("dC_Bienes", "Bienes")
+g2_tasa <- graficar_modelo_tasa("dC_Servicios", "Servicios")
+g3_tasa <- graficar_modelo_tasa("dC_Privado", "Privado")
+g4_tasa <- graficar_modelo_tasa("dC_Gobierno", "Gobierno")
+
+# Organizar los gráficos en una cuadrícula 2x2 con patchwork
+grafica <- (g1_tasa | g2_tasa) / (g3_tasa | g4_tasa)
+
+# Mostrar la gráfica al final del chunk
+grafica
+
+
+```
+
+```{r tabla_modelo_tasas, result='asis', echo=FALSE, message=FALSE, warning=FALSE, fig.pos="ht"}
+
+# Cargar paquetes necesarios
+library(dplyr)
+library(broom)
+library(knitr)
+library(kableExtra)
+
+# Extraer los coeficientes de los modelos en formato tabla
+resultados_modelo2 <- bind_rows(
+  tidy(modelos_tasa$Bienes) %>% mutate(Modelo = "Consumo de Bienes"),
+  tidy(modelos_tasa$Servicios) %>% mutate(Modelo = "Consumo de Servicios"),
+  tidy(modelos_tasa$Privado) %>% mutate(Modelo = "Consumo Privado"),
+  tidy(modelos_tasa$Gobierno) %>% mutate(Modelo = "Consumo de Gobierno")
+) %>%
+  select(Modelo, term, estimate, std.error, statistic, p.value) %>%
+  rename(Variable = term, 
+         Coeficiente = estimate, 
+         `Error estándar` = std.error, 
+         `Estadístico T` = statistic, 
+         `P-valor` = p.value)
+
+# Agregar medidas de ajuste (R², R² ajustado y AIC)
+ajuste_modelo2 <- bind_rows(
+  glance(modelos_tasa$Bienes) %>% mutate(Modelo = "Consumo de Bienes"),
+  glance(modelos_tasa$Servicios) %>% mutate(Modelo = "Consumo de Servicios"),
+  glance(modelos_tasa$Privado) %>% mutate(Modelo = "Consumo Privado"),
+  glance(modelos_tasa$Gobierno) %>% mutate(Modelo = "Consumo de Gobierno")
+) %>%
+  select(Modelo, r.squared, adj.r.squared, AIC) %>%
+  rename(`R²` = r.squared, 
+         `R² Ajustado` = adj.r.squared)
+
+# Unir ambas tablas
+tabla_modelo2 <- left_join(resultados_modelo2, ajuste_modelo2, by = "Modelo")
+
+# Crear tabla en formato LaTeX con kableExtra
+tabla_latex <- tabla_modelo2 %>%
+  knitr::kable(
+    format = "latex",
+    booktabs = TRUE,
+    align = "c",
+    digits = 4,
+    caption = "Resultados de regresión del Modelo 2: Tasas de Crecimiento del Consumo y el PIB"
+  ) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down"), 
+                position = "center", font_size = 8) %>%
+  add_header_above(c(" " = 1, "Parámetros Estimados" = 5, "Bondad de Ajuste" = 2)) %>%
+  column_spec(1, bold = TRUE)
+
+# Mostrar la tabla en PDF
+tabla_latex
+
+```
+
+
+\clearpage
+
+El **Modelo 2** evalúa la relación entre la *tasa de crecimiento del PIB* y la *tasa de crecimiento del consumo*. Se observa que el **consumo privado** y el **consumo de bienes** tienen coeficientes positivos y significativos, con valores cercanos a 1, lo que indica una fuerte relación con el crecimiento económico. En contraste, el **consumo de servicios** muestra una menor elasticidad respecto al PIB, reflejando una respuesta más moderada a las fluctuaciones económicas. Finalmente, el **consumo de gobierno** presenta un coeficiente bajo y no significativo, sugiriendo que su comportamiento es más independiente del ciclo económico y puede estar determinado por políticas fiscales en lugar de factores de mercado.
+
+```{r grafica_modelo_tres, echo=FALSE, fig.cap="Relación entre la tasa de crecimiento rezagada del PIB y la tasa de crecimiento del consumo: Modelo 3", warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.pos="t"}
+
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# Crear variable del PIB rezagado
+datos_merged <- datos_merged %>%
+  mutate(dY_lag = lag(dY))
+
+# Definir los modelos para cada tipo de consumo con dY rezagado
+modelos_tres <- list(
+  "Consumo de Bienes" = lm(`Consumo de Bienes` ~ dY_lag, data = datos_merged),
+  "Consumo de Servicios" = lm(`Consumo de Servicios` ~ dY_lag, data = datos_merged),
+  "Consumo Privado" = lm(`Consumo Privado` ~ dY_lag, data = datos_merged),
+  "Consumo de Gobierno" = lm(`Consumo de Gobierno` ~ dY_lag, data = datos_merged)
+)
+
+# Función para generar gráficos de regresión con nombres más compactos
+graficar_modelo_tres <- function(variable_consumo, nombre_consumo) {
+  ggplot(datos_merged, aes(x = dY_lag, y = .data[[variable_consumo]])) +
+    geom_point(color = "black", alpha = 0.7) + 
+    geom_smooth(method = "lm", color = "blue", se = TRUE) +  
+    labs(x = "Δ% PIB (rez.)", y = paste("Δ%", nombre_consumo)) +  # Abreviaciones
+    theme_classic() +
+    theme(
+      axis.title = element_text(size = 12),   # Tamaño de texto en ejes
+      axis.text = element_text(size = 10)     # Tamaño más legible en números
+    )
+}
+
+# Crear gráficos con nombres más cortos
+g1 <- graficar_modelo_tres("Consumo de Bienes", "Bienes")
+g2 <- graficar_modelo_tres("Consumo de Servicios", "Servicios")
+g3 <- graficar_modelo_tres("Consumo Privado", "Privado")
+g4 <- graficar_modelo_tres("Consumo de Gobierno", "Gobierno")
+
+# Organizar los gráficos en una cuadrícula 2x2
+grafica <- (g1 | g2) / (g3 | g4)
+
+# Mostrar la gráfica al final del chunk
+grafica
+
+```
+
+```{r tabla_modelo_tres, result='asis', echo=FALSE, message=FALSE, warning=FALSE, fig.pos="ht"}
+
+# Cargar paquetes necesarios
+library(dplyr)
+library(broom)
+library(knitr)
+library(kableExtra)
+
+# Extraer los coeficientes de los modelos en formato tabla
+resultados_modelo3 <- bind_rows(
+  tidy(modelos_tres$`Consumo de Bienes`) %>% mutate(Modelo = "Consumo de Bienes"),
+  tidy(modelos_tres$`Consumo de Servicios`) %>% mutate(Modelo = "Consumo de Servicios"),
+  tidy(modelos_tres$`Consumo Privado`) %>% mutate(Modelo = "Consumo Privado"),
+  tidy(modelos_tres$`Consumo de Gobierno`) %>% mutate(Modelo = "Consumo de Gobierno")
+) %>%
+  select(Modelo, term, estimate, std.error, statistic, p.value) %>%
+  rename(Variable = term, 
+         Coeficiente = estimate, 
+         `Error estándar` = std.error, 
+         `Estadístico T` = statistic, 
+         `P-valor` = p.value)
+
+# Agregar medidas de ajuste (R², R² ajustado y AIC)
+ajuste_modelo3 <- bind_rows(
+  glance(modelos_tres$`Consumo de Bienes`) %>% mutate(Modelo = "Consumo de Bienes"),
+  glance(modelos_tres$`Consumo de Servicios`) %>% mutate(Modelo = "Consumo de Servicios"),
+  glance(modelos_tres$`Consumo Privado`) %>% mutate(Modelo = "Consumo Privado"),
+  glance(modelos_tres$`Consumo de Gobierno`) %>% mutate(Modelo = "Consumo de Gobierno")
+) %>%
+  select(Modelo, r.squared, adj.r.squared, AIC) %>%
+  rename(`R²` = r.squared, 
+         `R² Ajustado` = adj.r.squared)
+
+# Unir ambas tablas
+tabla_modelo3 <- left_join(resultados_modelo3, ajuste_modelo3, by = "Modelo")
+
+# Crear tabla en formato LaTeX con kableExtra
+tabla_latex <- tabla_modelo3 %>%
+  knitr::kable(
+    format = "latex",
+    booktabs = TRUE,
+    align = "c",
+    digits = 4,
+    caption = "Resultados de regresión del Modelo 3: Crecimiento del PIB Rezagado y Consumo"
+  ) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down"), 
+                position = "center", font_size = 8) %>%
+  add_header_above(c(" " = 1, "Parámetros Estimados" = 5, "Bondad de Ajuste" = 3)) %>%
+  column_spec(1, bold = TRUE)
+
+# Mostrar la tabla en PDF
+tabla_latex
+
+
+
+```
+
+\clearpage
+
+La tabla del modelo 3 muestra los coeficientes estimados para la relación entre el **crecimiento del PIB rezagado** y las tasas de crecimiento del consumo. Se observa que la variable **dY_lag** tiene un efecto significativo en algunos tipos de consumo, lo que sugiere una **relación dinámica entre el crecimiento económico pasado y el consumo actual**. 
+
+El **Consumo Privado** presenta el **coeficiente más alto**, indicando que es el componente más sensible a cambios en el PIB pasado. En contraste, el **Consumo de Gobierno** muestra una relación débil con el PIB rezagado, lo que podría reflejar decisiones de gasto más autónomas. En general, los valores de **\( R^2 \) y \( R^2 \) ajustado** sugieren que el modelo explica mejor el consumo privado que el de gobierno.
+
+```{r grafica_modelo_cuatro, echo=FALSE, fig.cap="Relación entre el crecimiento del PIB en logaritmos y los diferentes tipos de consumo: Modelo 4", warning=FALSE, message=FALSE, fig.width=6, fig.height=4, fig.pos="ht"}
+
+# Cargar paquetes necesarios
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# Calcular diferencias en logaritmos (aproximación de tasas de crecimiento)
+datos_merged <- datos_merged %>%
+  mutate(
+    dy = log(Y) - log(lag(Y)),  # Cambio en logaritmo del PIB
+    dc_bienes = log(Consumo_bienes) - log(lag(Consumo_bienes)),
+    dc_servicios = log(Consumo_servicios) - log(lag(Consumo_servicios)),
+    dc_privado = log(Consumo_privado) - log(lag(Consumo_privado)),
+    dc_gobierno = log(Consumo_gobierno) - log(lag(Consumo_gobierno))
+  ) %>%
+  drop_na()  # Eliminar valores perdidos generados por el cálculo de log-diferencias
+
+# Definir modelos lineales para cada tipo de consumo con diferencias en logaritmos
+modelos_cuatro <- list(
+  "Bienes" = lm(dc_bienes ~ dy, data = datos_merged),
+  "Servicios" = lm(dc_servicios ~ dy, data = datos_merged),
+  "Privado" = lm(dc_privado ~ dy, data = datos_merged),
+  "Gobierno" = lm(dc_gobierno ~ dy, data = datos_merged)
+)
+
+# Función para generar gráficos con etiquetas en logaritmos
+graficar_modelo_cuatro <- function(variable_consumo, nombre_consumo) {
+  ggplot(datos_merged, aes(x = dy, y = .data[[variable_consumo]])) +
+    geom_point(color = "black", alpha = 0.7) + 
+    geom_smooth(method = "lm", color = "blue", se = TRUE) +  
+    labs(x = "Δ ln(PIB)", 
+         y = paste0("Δ ln(", nombre_consumo, ")")) +  # Etiquetas en logaritmos
+    theme_classic()
+}
+
+# Crear gráficos con nombres de consumo abreviados
+g1_cuatro <- graficar_modelo_cuatro("dc_bienes", "Bienes")
+g2_cuatro <- graficar_modelo_cuatro("dc_servicios", "Servicios")
+g3_cuatro <- graficar_modelo_cuatro("dc_privado", "Privado")
+g4_cuatro <- graficar_modelo_cuatro("dc_gobierno", "Gobierno")
+
+# Organizar los gráficos en una cuadrícula 2x2
+grafica <- (g1_cuatro | g2_cuatro) / (g3_cuatro | g4_cuatro)
+
+# Mostrar la gráfica al final del chunk
+grafica
+
+```
+
+```{r tabla_modelo_cuatro, result='asis', echo=FALSE, message=FALSE, warning=FALSE, fig.pos="ht"}
+
+# Cargar paquetes necesarios
+library(dplyr)
+library(broom)
+library(knitr)
+library(kableExtra)
+
+# Extraer los coeficientes de los modelos en formato tabla
+resultados_modelo4 <- bind_rows(
+  tidy(modelos_cuatro$Bienes) %>% mutate(Modelo = "Consumo de Bienes"),
+  tidy(modelos_cuatro$Servicios) %>% mutate(Modelo = "Consumo de Servicios"),
+  tidy(modelos_cuatro$Privado) %>% mutate(Modelo = "Consumo Privado"),
+  tidy(modelos_cuatro$Gobierno) %>% mutate(Modelo = "Consumo de Gobierno")
+) %>%
+  filter(p.value < 0.05) %>%  # Filtrar solo coeficientes significativos
+  select(Modelo, term, estimate, std.error, statistic, p.value) %>%
+  rename(Variable = term, 
+         Coeficiente = estimate, 
+         `Error estándar` = std.error, 
+         `Estadístico T` = statistic, 
+         `P-valor` = p.value)
+
+# Agregar medidas de ajuste (R², R² ajustado y AIC)
+ajuste_modelo4 <- bind_rows(
+  glance(modelos_cuatro$Bienes) %>% mutate(Modelo = "Consumo de Bienes"),
+  glance(modelos_cuatro$Servicios) %>% mutate(Modelo = "Consumo de Servicios"),
+  glance(modelos_cuatro$Privado) %>% mutate(Modelo = "Consumo Privado"),
+  glance(modelos_cuatro$Gobierno) %>% mutate(Modelo = "Consumo de Gobierno")
+) %>%
+  select(Modelo, r.squared, adj.r.squared, AIC) %>%
+  rename(`R²` = r.squared, 
+         `R² Ajustado` = adj.r.squared)
+
+# Unir ambas tablas
+tabla_modelo4 <- left_join(resultados_modelo4, ajuste_modelo4, by = "Modelo")
+
+# Crear tabla en formato LaTeX con kableExtra
+tabla_latex <- tabla_modelo4 %>%
+  knitr::kable(
+    format = "latex",
+    booktabs = TRUE,
+    align = "c",
+    digits = 4,
+    caption = "Resultados de regresión del Modelo 4: Elasticidades del Consumo respecto al PIB"
+  ) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down"), 
+                position = "center", font_size = 8) %>%
+  add_header_above(c(" " = 1, "Parámetros Estimados" = 5, "Bondad de Ajuste" = 3)) %>%
+  column_spec(1, bold = TRUE)
+
+# Mostrar la tabla en PDF
+tabla_latex
+
+```
+
+Los resultados muestran que el crecimiento del PIB en logaritmos (\( \Delta \ln Y \)) tiene un impacto positivo y significativo en el **Consumo de Bienes, Servicios y Privado**, con elasticidades de **0.9633, 0.5335 y 0.8312**, respectivamente. Esto sugiere que un **incremento del 1% en el PIB se asocia con aumentos del 0.96%, 0.53% y 0.83% en estos tipos de consumo**. En contraste, el **Consumo de Gobierno no muestra una relación significativa con el PIB rezagado**, reflejando su menor dependencia del ciclo económico. Los altos valores de **\( R^2 \)** en los modelos de bienes y privado (**0.8687 y 0.8691**) indican un buen ajuste del modelo, mientras que el consumo de gobierno presenta el menor ajuste.
+
+### ***g)***
+***Explique qué se podría concluir, si fuera el caso, a cerca de la Hipótesis de Ingreso Permanente para México a partir de los coeficientes encontrados.***
+
+La **Hipótesis del Ingreso Permanente** (HIP) de Friedman sugiere que los consumidores basan sus decisiones de consumo en su ingreso esperado a largo plazo, en lugar de cambios transitorios en el ingreso actual. Si la HIP se sostiene, el consumo debería responder **débilmente** a variaciones de corto plazo en el PIB y estar más influenciado por el ingreso esperado.
+
+Los resultados muestran que en el **Modelo 1** (nivel de consumo y PIB), los coeficientes son altamente significativos y cercanos a 0.2-0.4, lo que indica que un aumento en el PIB impacta el consumo, pero no de manera proporcional. En el **Modelo 2** (tasas de crecimiento), el coeficiente de \( dY \) es más alto para el consumo privado (**0.83**), sugiriendo que una parte importante del consumo responde a cambios en el PIB, lo que debilita la HIP. Sin embargo, en el **Modelo 3** (PIB rezagado), la relación no es significativa, lo que sugiere que el consumo no depende fuertemente del PIB pasado.
+
+Finalmente, el **Modelo 4** (elasticidades) muestra que el consumo de bienes y privado tienen coeficientes altos (**0.96 y 0.83**), lo que indica que los hogares ajustan su consumo ante cambios en el PIB en lugar de basarse únicamente en expectativas de ingreso permanente. Esto sugiere que la **HIP no se sostiene completamente para México**, pues el consumo responde significativamente a fluctuaciones contemporáneas del PIB, en lugar de suavizarse con base en el ingreso esperado a largo plazo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## **Ejercicio 4 **
+Estudie el consumo de los individuos en México, siguiendo estos pasos:[1 hora, 0.5 puntos cada inciso]
+
+### ***a)***
+***Baje los datos de un año de la ENIGH del sitio del INEGI, (Cada grupo va a utilizar unos datos diferentes: Grupo 1, año 2022; Grupo 2, año 2020; Grupo 3,año 2018; ..., etc.).***
+
+Somos el Equipo #2 , por tanto nos corresponde analizar la ENIGH de 2020
+
+### ***b)***
+***Establezca el número de hogares entrevistados y el ingreso y el gasto promedio y luego utilize los factores de expansión para calcular el ingreso y gasto promedio de todos los hogares mexicanos.***
+
+```{r tabla_enigh_2020_final, result='asis', echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(readr)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(scales)  # Para formato de miles
+
+# Cargar la base de datos de la ENIGH 2020
+enigh_2020 <- read_csv("enigh_2020.csv")
+
+# Calcular el número de hogares encuestados
+num_hogares_entrevistados <- sum(enigh_2020$foliohog, na.rm = TRUE)
+
+# Calcular el número total de hogares en México con el factor de expansión
+num_hogares_nacional <- sum(enigh_2020$factor, na.rm = TRUE)
+
+# Calcular ingreso y gasto promedio en la muestra
+ingreso_promedio_muestra <- mean(enigh_2020$ing_cor, na.rm = TRUE)
+gasto_promedio_muestra <- mean(enigh_2020$gasto_mon, na.rm = TRUE)
+
+# Calcular ingreso y gasto promedio a nivel nacional usando factores de expansión
+ingreso_promedio_nacional <- sum(enigh_2020$ing_cor * enigh_2020$factor, na.rm = TRUE) / sum(enigh_2020$factor, na.rm = TRUE)
+gasto_promedio_nacional <- sum(enigh_2020$gasto_mon * enigh_2020$factor, na.rm = TRUE) / sum(enigh_2020$factor, na.rm = TRUE)
+
+# Crear un dataframe con los resultados
+tabla_enigh <- data.frame(
+  Métrica = c("Número de hogares entrevistados", 
+              "Número total de hogares en México",
+              "Ingreso promedio en muestra", 
+              "Gasto promedio en muestra", 
+              "Ingreso promedio nacional", 
+              "Gasto promedio nacional"),
+  Valor = c(num_hogares_entrevistados, 
+            num_hogares_nacional,
+            ingreso_promedio_muestra, 
+            gasto_promedio_muestra, 
+            ingreso_promedio_nacional, 
+            gasto_promedio_nacional)
+) %>%
+  mutate(Valor = format(Valor, big.mark = ",", scientific = FALSE))  # Formato correcto de miles sin decimales
+
+# Generar la tabla con kable para LaTeX y aplicar negritas correctamente
+tabla_enigh_kable <- tabla_enigh %>%
+  kable(format = "latex", booktabs = TRUE,
+        col.names = c("Métrica", "Valor"),
+        caption = "Resumen del ingreso y gasto promedio en la ENIGH 2020") %>%
+  kable_styling(latex_options = c("hold_position", "striped"), 
+                font_size = 12, full_width = TRUE, position = "center") %>%
+  column_spec(2, bold = TRUE)  # Aplicar negritas solo a la columna de valores
+
+# Mostrar la tabla
+tabla_enigh_kable
+```
+### ***c)***
+***Estime una relación entre ingreso y gasto de las familias entrevistadas y reporte sus resultados.***
+
+```{r graf_ingreso_vs_gasto, echo=FALSE, fig.cap="Relación entre Ingreso y Gasto de las Familias", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+
+# Filtrar datos para evitar valores extremos irreales (opcionales, si es necesario)
+enigh_filtrada <- enigh_2020 %>%
+  filter(ing_cor > 0, gasto_mon > 0)  # Solo hogares con ingreso y gasto positivo
+
+# Crear gráfico de dispersión con línea de tendencia
+graf_ingreso_vs_gasto <- ggplot(enigh_filtrada, aes(x = ing_cor, y = gasto_mon)) +
+  geom_point(alpha = 0.3, color = "blue") +  # Puntos en color azul con transparencia
+  geom_smooth(method = "lm", color = "red", se = TRUE) +  # Línea de regresión con IC
+  labs(
+    x = "Ingreso del Hogar (MXN)", 
+    y = "Gasto del Hogar (MXN)", 
+    title = "Relación entre Ingreso y Gasto de las Familias"
+  ) +
+  scale_x_continuous(labels = scales::comma) +  # Formato miles con comas
+  scale_y_continuous(labels = scales::comma) +  
+  theme_minimal()
+
+# Mostrar la gráfica
+graf_ingreso_vs_gasto
+```
+
+El gráfico de dispersión muestra una **fuerte relación positiva** entre el ingreso y el gasto de las familias, lo que sugiere que a **mayor ingreso, mayor gasto**. Sin embargo, se observan **valores atípicos** con ingresos extremadamente altos, lo que podría distorsionar la estimación de la relación promedio. La **línea de regresión** indica que, en general, los hogares siguen un patrón de consumo proporcional a su ingreso, aunque con una variabilidad considerable en los niveles más bajos. Este comportamiento es **consistente con la teoría del consumo**, donde los hogares ajustan su gasto de acuerdo con su capacidad económica, pero podrían existir efectos de **restricciones de liquidez** o **patrones de ahorro** en ciertos segmentos.
+
+
+
+### ***d)***
+***Estime una relación entre ingreso y gasto de la misma forma, pero para hogares unipersonales con jefe de familia con edad entre 50 y 60 años de edad de la Ciudad de México.***
+
+```{r graf_ingreso_vs_gasto_cdmx, echo=FALSE, fig.cap="Relación entre Ingreso y Gasto en Hogares Unipersonales (CDMX, 50-60 años)", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+
+# Filtrar hogares de la Ciudad de México con jefe de familia entre 50-60 años y unipersonales
+enigh_cdmx <- enigh_2020 %>%
+  filter(
+    substr(folioviv, 1, 2) == "09",  # Filtrar Ciudad de México (Entidad 09)
+    clase_hog == 1,  # Hogares unipersonales
+    edad_jefe >= 50 & edad_jefe <= 60,  # Edad del jefe de familia entre 50 y 60 años
+    ing_cor > 0, gasto_mon > 0  # Excluir valores negativos o ceros
+  )
+
+# Verificar si hay datos suficientes antes de graficar
+if(nrow(enigh_cdmx) > 0) {
+  
+  # Crear gráfico de dispersión con línea de tendencia
+  graf_ingreso_vs_gasto_cdmx <- ggplot(enigh_cdmx, aes(x = ing_cor, y = gasto_mon)) +
+    geom_point(alpha = 0.5, color = "darkblue") +  # Puntos en color azul oscuro
+    geom_smooth(method = "lm", color = "red", se = TRUE) +  # Línea de regresión con IC
+    labs(
+      x = "Ingreso del Hogar (MXN)", 
+      y = "Gasto del Hogar (MXN)", 
+      title = "Relación entre Ingreso y Gasto en Hogares Unipersonales (CDMX, 50-60 años)"
+    ) +
+    scale_x_continuous(labels = scales::comma) +  # Formato miles con comas
+    scale_y_continuous(labels = scales::comma) +  
+    theme_minimal()
+  
+  # Mostrar la gráfica
+  graf_ingreso_vs_gasto_cdmx
+  
+} else {
+  print("No hay suficientes datos para graficar la relación en esta submuestra.")
+}
+```
+El gráfico muestra la **relación entre ingreso y gasto** en hogares **unipersonales** de la **Ciudad de México** con jefes de familia entre **50 y 60 años**. Se observa una relación **positiva y creciente**, lo que sugiere que **a mayor ingreso, mayor es el gasto del hogar**. La línea roja representa la **regresión lineal**, indicando una tendencia clara en la que **el consumo aumenta de manera proporcional al ingreso**, aunque con **dispersión en los valores**. Se aprecian algunos puntos alejados de la tendencia, sugiriendo la existencia de hogares con **altos ingresos que no necesariamente gastan más** en la misma proporción. Además, el **intervalo de confianza sombreado** sugiere que, aunque la relación es significativa, **existen variaciones en el patrón de consumo** dentro de este grupo específico de hogares.
+
+### ***e)***
+***Estime una relación entre ingreso y gasto de la misma forma, pero para hogares del ambito rural.***
+
+```{r graf_ingreso_gasto_rural_corregido, echo=FALSE, fig.cap="Relación entre Ingreso y Gasto en Hogares Rurales", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+library(scales)  # Para formato de eje
+
+# Filtrar hogares rurales (tercer dígito del folioviv es '6')
+datos_rurales <- enigh_2020 %>%
+  mutate(ambito = substr(folioviv, 3, 3)) %>%  # Extraer el tercer dígito
+  filter(ambito == "6") %>%  # Filtrar hogares rurales
+  select(ing_cor, gasto_mon) %>%  # Seleccionar ingreso y gasto
+  filter(ing_cor > 0, gasto_mon > 0)  # Eliminar valores no válidos
+
+# Estimación de la relación entre ingreso y gasto
+modelo_rural <- lm(gasto_mon ~ ing_cor, data = datos_rurales)
+
+# Crear gráfico de dispersión con línea de regresión
+graf_ingreso_gasto_rural_corregido <- ggplot(datos_rurales, aes(x = ing_cor, y = gasto_mon)) +
+  geom_point(color = "blue", alpha = 0.5) +  # Puntos de datos
+  geom_smooth(method = "lm", color = "red", se = TRUE) +  # Línea de regresión con intervalo de confianza
+  scale_x_continuous(labels = comma) +  # Formato de números en eje X
+  scale_y_continuous(labels = comma) +  # Formato de números en eje Y
+  labs(
+    x = "Ingreso del Hogar (MXN)",
+    y = "Gasto del Hogar (MXN)",
+    title = "Relación entre Ingreso y Gasto en Hogares Rurales"
+  ) +
+  theme_minimal()
+
+# Mostrar la gráfica
+graf_ingreso_gasto_rural_corregido
+
+```
+
+El gráfico muestra la relación entre **ingreso y gasto** en hogares **rurales** de México. Se observa una **fuerte correlación positiva**, lo que indica que a medida que el ingreso del hogar aumenta, el gasto también lo hace. Sin embargo, en comparación con los hogares urbanos, los **hogares rurales tienden a tener ingresos y gastos menores**, reflejando diferencias estructurales en la distribución del ingreso. Además, hay **una alta concentración de observaciones en niveles bajos de ingreso y gasto**, lo que sugiere que la mayoría de los hogares rurales tienen recursos económicos limitados. La **pendiente de la línea de regresión** indica que el **incremento en el ingreso se traduce en un incremento proporcional del gasto**, aunque es posible que en niveles altos de ingreso la relación tienda a estabilizarse.
+
+
+
+### ***f)***
+***Interprete sus resultados a la luz de la HIP y comparados con los resultados para las variables agregadas.***
+
+La **Hipótesis del Ingreso Permanente (HIP)** sostiene que los individuos suavizan su consumo a lo largo del tiempo, basándose en su ingreso **permanente** en lugar de su ingreso **transitorio**. Esto implica que el consumo debería ser **menos volátil** que el ingreso agregado o el PIB, ya que los hogares ajustan su gasto para evitar grandes fluctuaciones en su bienestar. 
+
+Los resultados obtenidos muestran que la **varianza del PIB (20.84)** es significativamente mayor que la del **consumo agregado (3.72)**, lo que sugiere que el consumo efectivamente exhibe **menor volatilidad** que el ingreso. Además, al descomponer el consumo, encontramos que los **bienes duraderos** son los más volátiles (**varianza de 22.54**), mientras que los **servicios y el consumo del gobierno** son relativamente más estables (**varianza de 4.13 y 0.98, respectivamente**). Esto concuerda con la HIP, ya que los hogares pueden **postergar el consumo de bienes duraderos**, mientras que los servicios y el consumo básico tienden a mantenerse constantes.
+
+Cuando comparamos estos resultados con los de las **variables individuales del ejercicio 4**, observamos que la relación ingreso-gasto a nivel de hogar sigue la misma lógica. En los hogares con **bajos ingresos**, el consumo es más sensible a cambios en el ingreso, mientras que en hogares con mayores ingresos, la relación es más estable. Esto indica que la suavización del consumo es más efectiva para aquellos con ingresos más altos, mientras que los hogares con restricciones financieras ajustan más su gasto ante cambios en el ingreso.
+
+En conclusión, los resultados apoyan la HIP en términos agregados, mostrando que el consumo es menos volátil que el ingreso. Sin embargo, a nivel microeconómico, las diferencias entre hogares urbanos, rurales y de distintos grupos demográficos sugieren que **la capacidad de suavizar el consumo varía entre los hogares**, dependiendo de su acceso al crédito y estabilidad en el ingreso. Esto resalta la importancia de analizar la HIP tanto a nivel agregado como individual para comprender mejor el comportamiento del consumo. 
+
+
+## **Ejercicio 5 **
+Estudie el nivel de riqueza neta de los hogares de acuerdo a la encuesta ENFIH-2019 del INEGI: [1 horas, 0.5 puntos cada inciso]
+
+### ***a)***
+***Obtenga los mcirodatos de la ENFIH.***
+
+### ***b)***
+***Tabule el nivel de riqueza neta de los hogares (usando el código que provee el INEGI), de acuerdo al tamaño de la localidad en la que radican.***
+
+```{r cargar_bases_enfih, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(readr)
+library(dplyr)
+
+# Definir la ruta de la carpeta descomprimida
+unzip_dir <- "enfih_2019_base_de_datos_csv"
+
+# Cargar bases de datos necesarias
+thogar <- read_csv(file.path(unzip_dir, "THOGAR.csv"))
+tbanca <- read_csv(file.path(unzip_dir, "TBANCA.csv"))
+tpropiedad <- read_csv(file.path(unzip_dir, "TPROPIEDAD.csv"))
+tmodulo <- read_csv(file.path(unzip_dir, "TMODULO.csv"))
+```
+
+```{r calcular_tabular_riqueza_corregido, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+
+# Seleccionar y renombrar variables clave para la riqueza neta
+riqueza_hogar <- thogar %>%
+  select(FOLIO, HOGAR, TLOC, FAC_HOG) %>%
+  mutate(FOLIO = as.character(FOLIO), HOGAR = as.character(HOGAR))
+
+# Extraer información financiera relevante
+riqueza_banca <- tbanca %>%
+  select(FOLIO, HOGAR, FACTOR, P8_18, P8_19, P8_20_1, P8_20_2) %>%
+  rename(Cuenta_Bancaria = P8_18, Ahorros = P8_19, Deuda1 = P8_20_1, Deuda2 = P8_20_2) %>%
+  mutate(FOLIO = as.character(FOLIO), HOGAR = as.character(HOGAR))
+
+# Extraer datos de propiedades
+riqueza_propiedades <- tpropiedad %>%
+  select(FOLIO, HOGAR, P5_11_1, P5_11_2) %>%
+  rename(Valor_Propiedad1 = P5_11_1, Valor_Propiedad2 = P5_11_2) %>%
+  mutate(FOLIO = as.character(FOLIO), HOGAR = as.character(HOGAR))
+
+# Extraer datos de activos y deudas adicionales
+riqueza_activos <- tmodulo %>%
+  select(FOLIO, HOGAR, P8_1_1, P8_1_2, P8_2_1, P8_2_2) %>%
+  rename(Ahorro1 = P8_1_1, Ahorro2 = P8_1_2, Deuda3 = P8_2_1, Deuda4 = P8_2_2) %>%
+  mutate(FOLIO = as.character(FOLIO), HOGAR = as.character(HOGAR))
+
+# Fusionar todas las bases por FOLIO y HOGAR
+riqueza_total <- riqueza_hogar %>%
+  left_join(riqueza_banca, by = c("FOLIO", "HOGAR")) %>%
+  left_join(riqueza_propiedades, by = c("FOLIO", "HOGAR")) %>%
+  left_join(riqueza_activos, by = c("FOLIO", "HOGAR"))
+
+# Convertir todas las columnas numéricas y reemplazar NAs con 0
+riqueza_total <- riqueza_total %>%
+  mutate(across(where(is.character), as.numeric)) %>%
+  mutate(across(where(is.numeric), ~replace_na(.x, 0)))
+
+# Calcular riqueza neta
+riqueza_total <- riqueza_total %>%
+  mutate(
+    Riqueza_Neta = (Cuenta_Bancaria + Ahorros + Valor_Propiedad1 + Valor_Propiedad2 + Ahorro1 + Ahorro2) -
+                   (Deuda1 + Deuda2 + Deuda3 + Deuda4)
+  )
+
+# Cargar librerías necesarias
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# Diccionario de nombres de localidad
+riqueza_total <- riqueza_total %>%
+  mutate(
+    TLOC = case_when(
+      TLOC == 1 ~ "Metropolitana",
+      TLOC == 2 ~ "Urbana",
+      TLOC == 3 ~ "Semiurbana",
+      TLOC == 4 ~ "Rural",
+      TRUE ~ as.character(TLOC)  # Para evitar perder valores si hay otros
+    )
+  )
+
+# Calcular estadísticas por tipo de localidad
+tabla_riqueza <- riqueza_total %>%
+  group_by(TLOC) %>%
+  summarise(
+    `Media Riqueza Neta` = mean(Riqueza_Neta, na.rm = TRUE),
+    `Mediana Riqueza Neta` = median(Riqueza_Neta, na.rm = TRUE),
+    `Desviación Estándar` = sd(Riqueza_Neta, na.rm = TRUE)
+  )
+
+# Formatear los valores con separadores de miles y sin decimales
+tabla_riqueza <- tabla_riqueza %>%
+  mutate(across(where(is.numeric), ~ format(round(.), big.mark = ",", scientific = FALSE))) %>%
+  rename(`Tamaño de Localidad` = TLOC)
+
+# Crear tabla en formato LaTeX para RMarkdown
+tabla_riqueza_kable <- kable(tabla_riqueza, format = "latex", booktabs = TRUE,
+                             caption = "Riqueza Neta de los Hogares por Tamaño de Localidad (Corregida)",
+                             col.names = c("Tamaño de Localidad", "Media Riqueza Neta", "Mediana Riqueza Neta", "Desviación Estándar")) %>%
+  kable_styling(latex_options = c("hold_position", "striped"),
+                font_size = 12, full_width = TRUE, position = "center")
+
+# Mostrar tabla en el documento
+tabla_riqueza_kable
+
+```
+
+"La tabla presenta el análisis de la **riqueza neta promedio, mediana y su dispersión** en función del tamaño de la localidad en la que residen los hogares en México, según la ENFIH 2019. Se observa que los hogares en **zonas metropolitanas** presentan la mayor riqueza neta promedio (**26,554,631 MXN**), mientras que los hogares en **zonas rurales** tienen la menor riqueza neta promedio (**8,493,655 MXN**). Esto sugiere que los activos y bienes acumulados en áreas urbanizadas son significativamente mayores en comparación con las zonas rurales, lo que refleja las disparidades económicas entre estas regiones."
+
+"Aunque la **media de riqueza neta es alta en áreas metropolitanas**, la **desviación estándar también es la mayor**, lo que indica una gran dispersión en los niveles de riqueza dentro de estas zonas. En contraste, la **riqueza mediana** en todas las localidades (excepto en áreas metropolitanas) es baja y similar, lo que sugiere que la mayoría de los hogares en zonas no metropolitanas poseen niveles de riqueza relativamente bajos y homogéneos. Este resultado refuerza la idea de que, si bien algunos hogares en ciudades pueden acumular una gran cantidad de activos, la mayoría de los hogares en el país tienen niveles de riqueza modestos y con menor variabilidad."
+
+
+### ***c)***
+***Haga una grá ca de dispersión de la relación entre el ingreso corriente efectivo de los hogares y la riqueza neta. (Al respecto pudiera ser necesario tomar solamente una muestra de hogares.***
+
+```{r graf_ingreso_vs_riqneta, echo=FALSE, warning=FALSE, message=FALSE }
+# Cargar la base TCONCENTRADORA que contiene ING_TOTAL
+tconcentradora <- read_csv("TCONCENTRADORA.csv")
+
+# Quitar ceros a la izquierda en FOLIO de tconcentradora
+tconcentradora <- tconcentradora %>%
+  mutate(FOLIO = sub("^0+", "", FOLIO))  # Elimina ceros al inicio
+
+# Asegurar que ambas claves sean tipo character
+riqueza_total <- riqueza_total %>%
+  mutate(FOLIO = as.character(FOLIO),
+         HOGAR = as.character(HOGAR))
+
+tconcentradora <- tconcentradora %>%
+  mutate(FOLIO = as.character(FOLIO),
+         HOGAR = as.character(HOGAR))
+
+# Volver a hacer el merge con las claves corregidas
+riqueza_ingreso <- riqueza_total %>%
+  left_join(tconcentradora %>% select(FOLIO, HOGAR, ING_TOTAL), 
+            by = c("FOLIO", "HOGAR"))
+```
+
+```{r graf_dispersion_ingreso_riqueza, echo=FALSE, fig.cap="Relación entre Ingreso Corriente Efectivo y Riqueza Neta", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+
+# Cargar librería necesaria
+library(ggplot2)
+
+# Filtrar solo valores positivos y tomar una muestra del 10%
+muestra_riqueza <- riqueza_ingreso %>%
+  filter(ING_TOTAL > 0, Riqueza_Neta > 0) %>%
+  sample_frac(0.1)  # Tomar 10% de los datos para la gráfica
+
+# Crear la gráfica de dispersión
+grafica_ingreso_riqueza <- ggplot(muestra_riqueza, aes(x = ING_TOTAL, y = Riqueza_Neta)) +
+  geom_point(color = "blue", alpha = 0.5) +  # Puntos azules con transparencia
+  geom_smooth(method = "lm", color = "red", se = TRUE) +  # Línea de regresión con sombra
+  scale_x_continuous(labels = scales::comma) +  # Formato de miles en eje X
+  scale_y_continuous(labels = scales::comma) +  # Formato de miles en eje Y
+  labs(
+    title = "Relación entre Ingreso Corriente Efectivo y Riqueza Neta",
+    x = "Ingreso Corriente Efectivo (MXN)",
+    y = "Riqueza Neta (MXN)"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+grafica_ingreso_riqueza
+```
+
+```{r graf_dispersion_log_ingreso_riqueza, echo=FALSE, fig.cap="Relación entre Ingreso Corriente Efectivo y Riqueza Neta (Escala Logarítmica)", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+
+# Filtrar valores positivos antes de aplicar logaritmo
+riqueza_ingreso_log <- riqueza_ingreso %>%
+  filter(ING_TOTAL > 0, Riqueza_Neta > 0) %>%
+  mutate(
+    log_ingreso = log(ING_TOTAL),
+    log_riqueza = log(Riqueza_Neta)
+  ) %>%
+  sample_frac(0.1)  # Tomar una muestra del 10% para evitar sobrecarga
+
+# Crear gráfico de dispersión con escala logarítmica
+grafica_logs <- ggplot(riqueza_ingreso_log, aes(x = log_ingreso, y = log_riqueza)) +
+  geom_point(color = "blue", alpha = 0.5) +  # Puntos azules con transparencia
+  geom_smooth(method = "lm", color = "red", se = TRUE) +  # Línea de regresión con sombra
+  labs(
+    title = "Relación entre Ingreso Corriente Efectivo y Riqueza Neta (Escala Logarítmica)",
+    x = "Log(Ingreso Corriente Efectivo) (MXN)",
+    y = "Log(Riqueza Neta) (MXN)"
+  ) +
+  theme_minimal()
+
+grafica_logs
+```
+
+La primera gráfica, sin transformación logarítmica, muestra la relación entre el **ingreso corriente efectivo** y la **riqueza neta** de los hogares. Sin embargo, los datos presentan una gran dispersión y valores extremos, lo que dificulta la identificación de una tendencia clara. En particular, observamos una **alta concentración de puntos cercanos a cero**, lo que sugiere que muchos hogares tienen bajos niveles de ingreso y riqueza, mientras que algunos pocos presentan valores extremadamente altos, distorsionando la relación visual.
+
+En contraste, la segunda gráfica utiliza una transformación **logarítmica**, lo que permite una mejor visualización de la relación entre estas variables. La transformación revela una **tendencia positiva más clara**, donde los hogares con mayores ingresos tienden a tener mayor riqueza neta. Sin embargo, también se observa que un **grupo significativo de hogares mantiene niveles de riqueza cercanos a cero**, independientemente de su nivel de ingreso. Esto sugiere que, aunque el ingreso y la riqueza están relacionados, hay otros factores que pueden estar influyendo en la acumulación de riqueza, como diferencias en hábitos de ahorro, acceso a activos financieros y herencias.
+
+
+### ***d)***
+***Haga un tabulado de las respuestas sobre las forma en que atienden gastos imprevistos, de acuerdo al tamaño de la localidad en la que radican.***
+
+```{r tabulado_gastos_imprevistos_tmodulo_expansion, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+# Cargar librerías necesarias
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# Seleccionar los hogares que atienden emergencias o imprevistos en la base TMODULO
+gastos_imprevistos_tmodulo <- tmodulo %>%
+  filter(as.numeric(P8_7_3) == 1) %>%  # Filtrar solo respuestas de emergencia o imprevistos
+  select(HOGAR, P8_7_3, FACTOR) %>%
+  mutate(HOGAR = as.numeric(HOGAR),  # Asegurar que HOGAR sea numérico
+         FACTOR = as.numeric(FACTOR))  # Convertir factor de expansión a numérico
+
+# Reemplazar códigos de localidad con nombres de categorías
+gastos_imprevistos_tmodulo <- gastos_imprevistos_tmodulo %>%
+  mutate(HOGAR = case_when(
+    HOGAR == 1 ~ "Metropolitana",
+    HOGAR == 2 ~ "Urbana",
+    HOGAR == 3 ~ "Semiurbana",
+    HOGAR == 4 ~ "Rural",
+    TRUE ~ "Desconocido"
+  ))
+
+# Calcular el total ponderado usando el factor de expansión
+tabla_gastos_imprevistos_tmodulo <- gastos_imprevistos_tmodulo %>%
+  group_by(HOGAR) %>%
+  summarise(Total_Ponderado = sum(FACTOR, na.rm = TRUE)) %>%
+  arrange(desc(Total_Ponderado))
+
+# Crear tabla en formato LaTeX para el PDF
+tabla_final_tmodulo_expansion <- tabla_gastos_imprevistos_tmodulo %>%
+  kable(format = "latex", booktabs = TRUE, digits = 0,
+        col.names = c("Tamaño de Localidad", "Número de Hogares (Ponderado)"),
+        caption = "Hogares que atienden gastos imprevistos según tamaño de localidad (TMODULO, con expansión)") %>%
+  kable_styling(latex_options = c("hold_position", "striped"), 
+                font_size = 12, full_width = FALSE, position = "center")
+
+# Mostrar la tabla
+tabla_final_tmodulo_expansion
+```
+
+La tabla muestra la distribución ponderada de los hogares que reportaron atender **gastos imprevistos** según el **tamaño de localidad** en la base TMODULO. Se observa que la mayoría de estos hogares se encuentran en **zonas metropolitanas**, con **922,463 hogares**, lo que indica que la mayor parte de la población que enfrenta imprevistos y accede a crédito para cubrirlos se encuentra en áreas altamente urbanizadas. En contraste, las zonas **urbanas y semiurbanas** presentan cifras considerablemente menores, con **10,272** y **2,730 hogares** respectivamente. Esto sugiere que la disponibilidad y uso del crédito para imprevistos es significativamente mayor en áreas urbanas densamente pobladas, mientras que en zonas rurales podría haber menos acceso a este tipo de financiamiento o una menor propensión a utilizarlo para estos fines.
+
+
+### ***e)***
+***Inteprete la gráfica y el tabulado.***
+
+La primera tabla sobre **riqueza neta** por tamaño de localidad nos muestra que los hogares en 
+**zonas metropolitanas** tienen, en promedio, la mayor riqueza neta, seguidos de los hogares **urbanos y semiurbanos**, 
+mientras que los hogares **rurales** tienen la menor riqueza neta. Esto sugiere que la concentración de riqueza está 
+fuertemente vinculada a la localización geográfica, lo que puede reflejar diferencias en acceso a oportunidades económicas, 
+mercados laborales y financiamiento.
+
+La gráfica de **dispersión entre ingreso corriente y riqueza neta** en **escala logarítmica** revela que existe una 
+relación positiva entre ambas variables, lo que confirma que los hogares con mayores ingresos tienden a acumular mayor 
+riqueza. No obstante, la dispersión de los puntos indica que esta relación no es perfecta, pues existen hogares con 
+ingresos relativamente bajos que poseen altos niveles de riqueza, posiblemente debido a herencias, ahorros previos o 
+inversiones en activos de alto valor.
+
+Finalmente, la tabla de **hogares que atienden gastos imprevistos según tamaño de localidad** destaca que la mayor cantidad 
+de hogares que destinan crédito a emergencias se encuentra en zonas **metropolitanas**, mientras que en zonas semiurbanas 
+y urbanas la proporción es considerablemente menor. Esto puede estar relacionado con la disponibilidad de crédito en 
+distintas regiones o con diferencias en las estrategias financieras de los hogares según su entorno socioeconómico.
+
+
+## **Ejercicio 6 **
+Estudie el acertijo del premio al riesgo para el caso de México y de EEUU siguiendo estos pasos: [3 horas, 0.5 puntos cada inciso].
+
+### ***a)***
+***Consiga los valores anuales de IPC, el Indice de Precios y Cotizaciones de la Bolsa Mexicana de Valores y del NASDAQ por lo menos desde 1990.***
+
+```{r cargar_datos_ipc, echo=FALSE, message=FALSE, warning=FALSE}
+
+# Definir rutas de archivos (ajusta la ruta según sea necesario)
+ruta_nasdaq <- "nasdaq_ipc_1990_2025.xlsx"
+ruta_bmv <- "ipc_bmv_1990_2025.xlsx"
+
+# Cargar los datos desde Excel
+nasdaq_data <- read_excel(ruta_nasdaq, sheet = 1)
+bmv_data <- read_excel(ruta_bmv, sheet = 1)
+
+```
+
+```{r corregir_fecha, echo=FALSE, message=FALSE, warning=FALSE}
+
+# Leer la base de datos desde Excel
+ruta_bmv <- "ipc_bmv_1990_2025.xlsx"
+bmv_data <- read_excel(ruta_bmv, sheet = 1)
+
+# Convertir la columna de fecha (suponiendo que la primera columna es la fecha)
+bmv_data <- bmv_data %>%
+  mutate(Fecha = as.Date(Fecha, origin = "1899-12-30"))  # Excel usa 1900 como día 1, pero el origen real es 1899-12-30
+
+```
+
+```{r convertir_a_anual, echo=FALSE, message=FALSE, warning=FALSE}
+
+# Cargar paquetes necesarios
+library(dplyr)
+
+# Convertir la columna de fecha a formato Date si no está en ese formato
+bmv_data <- bmv_data %>%
+  mutate(Fecha = as.Date(Fecha))
+
+# Extraer el año de la fecha
+bmv_data <- bmv_data %>%
+  mutate(Año = format(Fecha, "%Y"))
+
+# Agrupar por año y calcular el promedio
+bmv_anual <- bmv_data %>%
+  group_by(Año) %>%
+  summarise(IPC_BMV_Promedio = mean(SF4782, na.rm = TRUE))  # Reemplazar con el nombre correcto de la variable
+
+# Convertir Año a formato numérico
+bmv_anual <- bmv_anual %>%
+  mutate(Año = as.numeric(Año))
+
+```
+
+```{r graf_ipc_nasdaq_doble_eje, echo=FALSE, fig.cap="Evolución del IPC (MXN) y NASDAQ (USD) desde 1990", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+
+# Definir rutas de archivos (ajusta la ruta según sea necesario)
+ruta_nasdaq <- "nasdaq_ipc_1990_2025.xlsx"
+ruta_bmv <- "ipc_bmv_1990_2025.xlsx"
+
+# Cargar los datos desde Excel
+nasdaq_data <- read_excel(ruta_nasdaq, sheet = 1)
+bmv_data <- read_excel(ruta_bmv, sheet = 1)
+
+# Convertir la columna de fecha a formato Date en el IPC (BMV)
+bmv_data <- bmv_data %>%
+  mutate(Fecha = as.Date(Fecha, origin = "1899-12-30"))  # Corrección para formato de fecha de Excel
+
+# Extraer el año y calcular el promedio anual del IPC
+bmv_anual <- bmv_data %>%
+  mutate(Año = format(Fecha, "%Y")) %>%
+  group_by(Año) %>%
+  summarise(IPC = mean(SF4782, na.rm = TRUE)) %>%  # Ajustar nombre de variable
+  mutate(Año = as.numeric(Año))  # Convertir a número para graficar
+
+# Asegurar que NASDAQ también tenga un formato adecuado (asumimos que ya es anual)
+colnames(nasdaq_data) <- c("Año", "NASDAQ")
+nasdaq_data <- nasdaq_data %>% mutate(Año = as.numeric(Año))  # Convertir Año a numérico si no lo es
+
+# Fusionar los datos en un solo dataframe
+datos_merged <- left_join(bmv_anual, nasdaq_data, by = "Año")
+
+# Escalar NASDAQ para graficar en el segundo eje (se ajusta a una escala relativa)
+max_ipc <- max(datos_merged$IPC, na.rm = TRUE)
+max_nasdaq <- max(datos_merged$NASDAQ, na.rm = TRUE)
+factor_escala <- max_ipc / max_nasdaq  # Ajuste para que las escalas sean comparables
+
+# Crear la gráfica con doble eje Y
+graf_ipc_nasdaq_doble_eje <- ggplot(datos_merged, aes(x = Año)) +
+  # Línea para IPC
+  geom_line(aes(y = IPC, color = "IPC"), size = 1) +
+  geom_point(aes(y = IPC, color = "IPC"), size = 2, shape = 21, fill = "white") +  # Puntos en IPC
+  # Línea para NASDAQ (escalado para la segunda escala)
+  geom_line(aes(y = NASDAQ * factor_escala, color = "NASDAQ"), size = 1) +
+  geom_point(aes(y = NASDAQ * factor_escala, color = "NASDAQ"), size = 2, shape = 21, fill = "white") +  # Puntos en NASDAQ
+  # Etiquetas y eje secundario
+  scale_y_continuous(
+    name = "IPC (MXN)",
+    sec.axis = sec_axis(~ . / factor_escala, name = "NASDAQ (USD)")
+  ) +
+  labs(x = "Año", title = "Evolución del IPC (MXN) y NASDAQ (USD) desde 1990", color = "Índice") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# Mostrar la gráfica
+graf_ipc_nasdaq_doble_eje
+```
+
+
+Para analizar la evolución de los índices bursátiles de **México y EE.UU.**, se importaron datos mensuales del **Índice de Precios y Cotizaciones (IPC) de la Bolsa Mexicana de Valores (BMV)** y del **Nasdaq Composite** desde **1990 hasta 2025**.
+
+Para facilitar la comparación y el análisis de largo plazo, los datos fueron transformados a una **serie anual** extrayendo el año de cada observación y calculando el **promedio anual de cada índice**. Esto permitió reducir la granularidad de la base de datos, pasando de valores mensuales a una serie de aproximadamente **35 observaciones por índice**, lo que facilita el estudio de tendencias y volatilidad en los mercados de capitales.
+
+
+### ***b)***
+La tasa de retorno nominal anual se calcula como la variación porcentual del índice respecto al año anterior, utilizando la fórmula:
+
+\[
+R_t = \left(\frac{I_t}{I_{t-1}} - 1\right) \times 100
+\]
+
+donde \( R_t \) es la tasa de retorno en el año \( t \), \( I_t \) es el valor del índice en ese año y \( I_{t-1} \) es el valor del año previo. Este cálculo se aplica tanto al **IPC BMV** como al **Nasdaq Composite**, permitiendo evaluar la evolución anual de los mercados. Un resultado positivo indica un crecimiento en el índice, mientras que un valor negativo refleja una caída en el mercado. Para facilitar la interpretación, la tasa de retorno se expresa en **porcentaje** multiplicando por 100.  
+
+```{r graf_retornos_ipc_nasdaq, echo=FALSE, fig.cap="Tasas de Retorno Anual del IPC (MXN) y NASDAQ (USD)", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="t"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(tidyr)
+
+# Definir rutas de archivos (ajusta la ruta según sea necesario)
+ruta_nasdaq <- "nasdaq_ipc_1990_2025.xlsx"
+ruta_bmv <- "ipc_bmv_1990_2025.xlsx"
+
+# Cargar los datos desde Excel
+nasdaq_data <- read_excel(ruta_nasdaq, sheet = 1)
+bmv_data <- read_excel(ruta_bmv, sheet = 1)
+
+# Convertir la columna de fecha a formato Date en el IPC (BMV)
+bmv_data <- bmv_data %>%
+  mutate(Fecha = as.Date(Fecha, origin = "1899-12-30"))  # Corrección para formato de fecha de Excel
+
+# Extraer el año y calcular el promedio anual del IPC
+bmv_anual <- bmv_data %>%
+  mutate(Año = format(Fecha, "%Y")) %>%
+  group_by(Año) %>%
+  summarise(IPC = mean(SF4782, na.rm = TRUE)) %>%  # Ajustar nombre de variable
+  mutate(Año = as.numeric(Año))  # Convertir a número para graficar
+
+# Asegurar que NASDAQ también tenga un formato adecuado (asumimos que ya es anual)
+colnames(nasdaq_data) <- c("Año", "NASDAQ")
+nasdaq_data <- nasdaq_data %>% mutate(Año = as.numeric(Año))  # Convertir Año a numérico si no lo es
+
+# Fusionar los datos en un solo dataframe
+datos_merged <- left_join(bmv_anual, nasdaq_data, by = "Año")
+
+# Calcular las tasas de retorno nominal anual
+datos_merged <- datos_merged %>%
+  arrange(Año) %>%
+  mutate(
+    Retorno_IPC = (IPC / lag(IPC) - 1) * 100,  # Retorno porcentual del IPC
+    Retorno_NASDAQ = (NASDAQ / lag(NASDAQ) - 1) * 100  # Retorno porcentual del NASDAQ
+  )
+
+# Transformar datos a formato largo para graficar
+datos_long <- datos_merged %>%
+  select(Año, Retorno_IPC, Retorno_NASDAQ) %>%
+  pivot_longer(cols = c("Retorno_IPC", "Retorno_NASDAQ"), names_to = "Índice", values_to = "Retorno")
+
+# Crear la gráfica con puntos en cada observación
+graf_retornos_ipc_nasdaq <- ggplot(datos_long, aes(x = Año, y = Retorno, color = Índice)) +
+  geom_line(size = 1) +
+  geom_point(size = 2, shape = 21, fill = "white") +  # Puntos en cada observación
+  labs(x = "Año", y = "Tasa de Retorno (%)", title = "Tasas de Retorno Anual del IPC y NASDAQ") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# Mostrar la gráfica
+graf_retornos_ipc_nasdaq
+```
+
+
+
+
+
+
+### ***c)***
+***Consiga los valores promedio anual de la tasa de interés a un año, para el período que esté disponible, para ambos países.***
+
+```{r corregir_fechas_tasas, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Cargar los datos desde Excel
+fed_data <- read_excel("FEDFUNDS.xlsx", sheet = 1)
+banxico_data <- read_excel("tasa_banxico.xlsx", sheet = 1)
+
+# Corregir la fecha en Banxico (convertir desde formato numérico de Excel)
+banxico_data <- banxico_data %>%
+  mutate(fecha = as.Date(fecha, origin = "1899-12-30"))  # Conversión correcta de fecha
+
+# Convertir la fecha en la FED (ya está en formato correcto, pero aseguramos que sea tipo Date)
+fed_data <- fed_data %>%
+  mutate(fecha = as.Date(fecha, format = "%Y-%m-%d"))  # Ya está bien, pero aseguramos consistencia
+
+# Extraer el año correctamente y calcular el promedio anual de tasas de interés
+fed_anual <- fed_data %>%
+  mutate(año = year(fecha)) %>%
+  group_by(año) %>%
+  summarise(Tasa_FED = mean(tasa, na.rm = TRUE)) %>%
+  mutate(año = as.numeric(año))  # Convertir Año a numérico
+
+banxico_anual <- banxico_data %>%
+  mutate(año = year(fecha)) %>%
+  group_by(año) %>%
+  summarise(Tasa_Banxico = mean(tasa, na.rm = TRUE)) %>%
+  mutate(año = as.numeric(año))  # Convertir Año a numérico
+
+```
+
+```{r graf_tasas_interes_corregido, echo=FALSE, fig.cap="Tasas de Interés Anual en México y EE.UU. (1990-2025)", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="H"}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Fusionar los datos en un solo dataframe por Año
+tasas_merged <- left_join(banxico_anual, fed_anual, by = "año")
+
+# Transformar datos a formato largo para graficar
+tasas_long <- tasas_merged %>%
+  pivot_longer(cols = c("Tasa_Banxico", "Tasa_FED"), names_to = "País", values_to = "Tasa")
+
+# Crear la gráfica con líneas y puntos en cada observación
+graf_tasas_interes_corregido <- ggplot(tasas_long, aes(x = año, y = Tasa, color = País)) +
+  geom_line(size = 1) +
+  geom_point(size = 2, shape = 21, fill = "white") +  # Puntos en cada observación
+  labs(x = "Año", y = "Tasa de Interés (%)", title = "Tasas de Interés Anual en México y EE.UU. (1990-2025)") +
+  scale_x_continuous(breaks = seq(1990, 2025, 5)) +  # Eje X con años correctos
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# Mostrar la gráfica
+graf_tasas_interes_corregido
+
+```
+
+
+### ***d)***
+***Calcule la diferencia entre el retorno del mercado de valores y el retorno de invertir a la tasa a un año.***
+
+```{r graf_exceso_retorno, echo=FALSE, fig.cap="Exceso de Retorno del Mercado de Valores sobre la Tasa de Interés a 1 Año", warning=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.pos="H"}
+# Cargar librerías necesarias
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+# Fusionar las bases de retornos del mercado y tasas de interés
+datos_exceso_retorno <- left_join(datos_merged, tasas_merged, by = c("Año" = "año"))
+
+# Calcular el exceso de retorno: diferencia entre el retorno del índice y la tasa de interés
+datos_exceso_retorno <- datos_exceso_retorno %>%
+  mutate(
+    Exceso_Retorno_IPC = Retorno_IPC - Tasa_Banxico,  # Exceso de retorno en México
+    Exceso_Retorno_NASDAQ = Retorno_NASDAQ - Tasa_FED  # Exceso de retorno en EE.UU.
+  ) %>%
+  select(Año, Exceso_Retorno_IPC, Exceso_Retorno_NASDAQ)  # Seleccionar solo columnas necesarias
+
+# Transformar datos a formato largo para graficar
+datos_exceso_long <- datos_exceso_retorno %>%
+  pivot_longer(cols = c("Exceso_Retorno_IPC", "Exceso_Retorno_NASDAQ"),
+               names_to = "Mercado",
+               values_to = "Exceso de Retorno")
+
+# Crear la gráfica
+graf_exceso_retorno <- ggplot(datos_exceso_long, aes(x = Año, y = `Exceso de Retorno`, color = Mercado)) +
+  geom_line(size = 1) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +  # Línea de referencia en 0
+  geom_point(size = 2, shape = 21, fill = "white") +  # Puntos en cada observación
+  labs(x = "Año", y = "Exceso de Retorno (%)", title = "Exceso de Retorno del Mercado de Valores sobre la Tasa de Interés a 1 Año") +
+  scale_x_continuous(breaks = seq(1990, 2025, 5)) +  # Ajuste en eje X para mejor lectura
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# Mostrar la gráfica
+graf_exceso_retorno
+```
+
+El exceso de retorno se calcula como la diferencia entre la tasa de retorno del mercado de valores y la tasa de interés libre de riesgo a un año. Matemáticamente, se define como:
+
+\( Exceso\_Retorno_t = Retorno\_Mercado_t - Tasa\_Interes_t \)
+
+donde \( Retorno\_Mercado_t \) representa la tasa de retorno anual del índice bursátil (IPC para México y NASDAQ para EE.UU.) y \( Tasa\_Interes_t \) es la tasa de interés anual de referencia (Banxico y Fed Funds, respectivamente).
+
+La gráfica muestra la evolución del exceso de retorno en ambos mercados. Un valor positivo indica que invertir en acciones ofreció mayores rendimientos que invertir en un instrumento libre de riesgo, mientras que un valor negativo sugiere que la renta fija fue una mejor opción en esos años. Se observa que, en ciertos periodos, como crisis financieras o ciclos económicos adversos, el exceso de retorno es negativo, reflejando caídas en los mercados bursátiles. Por otro lado, en épocas de crecimiento económico, el mercado de valores tiende a ofrecer retornos superiores a la tasa de interés.  
+
+
+### ***e)***
+***Calcule la covarianza entre dicha diferencias y la tasa de crecimiento real del consumo agregado de cada economía***
+
+```{r cargar_consumo_mexico, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Cargar la base de datos desde el archivo Excel
+consumo_data <- read_excel("od_global_bs_T193_T32024.xlsx")
+
+# Seleccionar las columnas necesarias y renombrarlas
+consumo_data <- consumo_data %>%
+  rename(Fecha = `Periods`,
+         Consumo_Privado = `Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Consumo privado  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral`,
+         Consumo_Gobierno = `Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Demanda > Valores absolutos acumulados > Consumo de gobierno  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral`)
+
+# Convertir la fecha a formato adecuado y extraer el año
+consumo_data <- consumo_data %>%
+  mutate(Fecha = as.Date(paste0(Fecha, "/01"), format="%Y/%m/%d"),  # Convertir a formato Date
+         Año = year(Fecha))  # Extraer el año
+
+# Agregar los valores de consumo privado y de gobierno para obtener el consumo total anual
+consumo_anual <- consumo_data %>%
+  group_by(Año) %>%
+  summarise(Consumo_Total = sum(Consumo_Privado + Consumo_Gobierno, na.rm = TRUE)) %>%
+  ungroup()
+
+# Convertir Año a numérico para análisis posterior
+consumo_anual <- consumo_anual %>%
+  mutate(Año = as.numeric(Año))
+
+```
+
+```{r calcular_tasa_crecimiento_consumo, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+
+# Calcular la tasa de crecimiento anual del consumo agregado
+consumo_anual <- consumo_anual %>%
+  arrange(Año) %>%  # Asegurar orden temporal
+  mutate(Crecimiento_Consumo = (Consumo_Total / lag(Consumo_Total) - 1) * 100)  # Cálculo de variación porcentual
+```
+
+```{r cargar_y_calcular_tasa_crecimiento_fed, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Cargar la base de datos desde el archivo Excel
+consumo_fed <- read_excel("consumo_ag_fed.xlsx")
+
+```
+
+```{r calcular_tasa_crecimiento_real_fed, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+library(lubridate)
+
+# Renombrar la columna correctamente
+consumo_fed <- consumo_fed %>%
+  rename(Consumo_FED = conusmo_fed)  # Corregir el nombre de la columna
+
+# Asegurar que la columna de consumo es numérica
+consumo_fed <- consumo_fed %>%
+  mutate(Consumo_FED = as.numeric(Consumo_FED))  # Convertir a numérico si es necesario
+
+# Calcular la tasa de crecimiento real del consumo agregado en EE.UU.
+consumo_fed_anual <- consumo_fed %>%
+  arrange(fecha) %>%
+  mutate(Crecimiento_Consumo_FED = (Consumo_FED / lag(Consumo_FED) - 1) * 100) %>%  # Variación porcentual
+  select(fecha, Crecimiento_Consumo_FED)  # Seleccionar solo las columnas necesarias
+
+```
+
+```{r calcular_covarianza_mexico, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+
+# Fusionar los datos de exceso de retorno con la tasa de crecimiento del consumo en México
+datos_mexico <- left_join(datos_exceso_retorno, consumo_anual, by = "Año")
+
+# Calcular la covarianza entre el exceso de retorno del IPC y la tasa de crecimiento del consumo
+cov_mexico <- cov(datos_mexico$Exceso_Retorno_IPC, datos_mexico$Crecimiento_Consumo, use = "complete.obs")
+
+# Mostrar el resultado
+cov_mexico
+```
+
+```{r calcular_covarianza_fed_corregida, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+
+# Renombrar la columna 'fecha' a 'Año' en consumo_fed_anual
+consumo_fed_anual <- consumo_fed_anual %>%
+  rename(Año = fecha) %>%
+  mutate(Año = as.numeric(format(Año, "%Y")))  # Convertir Año a numérico
+
+# Fusionar los datos de exceso de retorno con la tasa de crecimiento del consumo en EE.UU.
+datos_eeuu <- left_join(datos_exceso_retorno, consumo_fed_anual, by = "Año")
+
+# Filtrar solo desde 2007 en adelante para evitar valores perdidos
+datos_eeuu <- datos_eeuu %>% filter(Año >= 2007)
+
+# Calcular la covarianza entre el exceso de retorno del NASDAQ y la tasa de crecimiento del consumo
+cov_eeuu <- cov(datos_eeuu$Exceso_Retorno_NASDAQ, datos_eeuu$Crecimiento_Consumo_FED, use = "complete.obs")
+
+#  Mostrar el resultado
+cov_eeuu
+
+
+```
+
+El objetivo de este inciso fue **analizar la relación entre la diferencia de rendimiento del mercado de valores y la tasa real de crecimiento del consumo agregado** en México y EE.UU. Para ello, calculamos el **exceso de retorno** como la diferencia entre el rendimiento del IPC y la tasa de interés en México, y entre el rendimiento del NASDAQ y la tasa de la FED en EE.UU. Luego, estimamos la **covarianza entre estas diferencias de rendimiento y la tasa real de crecimiento del consumo** en cada país. Para asegurar la consistencia de los datos, filtramos la serie de EE.UU. desde **2007 en adelante**, ya que los datos de consumo de la FED solo están disponibles a partir de ese año.  
+
+Los resultados muestran que la **covarianza en México es aproximadamente 59**, mientras que en **EE.UU. es cercana a 2.54**. **Una mayor covarianza indica que los movimientos en el exceso de retorno están más alineados con las variaciones en el consumo agregado**, lo que sugiere que en México existe una relación más fuerte entre ambas variables. En cambio, la covarianza más baja en EE.UU. sugiere que las fluctuaciones del mercado de valores tienen una menor conexión con los cambios en el consumo agregado. Esto puede estar relacionado con diferencias estructurales en los mercados financieros de ambos países, la mayor diversificación de activos en EE.UU. o diferencias en la forma en que los hogares responden a la variabilidad en los retornos del mercado.  
+
+
+
+### ***f)***
+***Calcule la covarianza entre dicha diferencias y la tasa de crecimiento real del consumo de bienes durables y luego de servicios de cada economía.***
+
+```{r calcular_covarianza_fed_bd_serv, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Cargar las bases de datos desde archivos Excel
+consumo_fed_serv <- read_excel("consumo_fed_serv.xlsx")
+consumo_fed_bd <- read_excel("consumo_fed_bd.xlsx")
+
+#  Renombrar columnas para consistencia
+consumo_fed_serv <- consumo_fed_serv %>%
+  rename(Año = fecha, Consumo_Servicios_FED = servicios) %>%
+  mutate(Año = as.numeric(format(Año, "%Y")))  # Convertir Año a numérico
+
+consumo_fed_bd <- consumo_fed_bd %>%
+  rename(Año = fecha, Consumo_BD_FED = bd) %>%
+  mutate(Año = as.numeric(format(Año, "%Y")))  # Convertir Año a numérico
+
+#  Calcular tasas de crecimiento real para cada tipo de consumo
+consumo_fed_serv <- consumo_fed_serv %>%
+  arrange(Año) %>%
+  mutate(Crecimiento_Consumo_Servicios_FED = (Consumo_Servicios_FED / lag(Consumo_Servicios_FED) - 1) * 100) %>%
+  select(Año, Crecimiento_Consumo_Servicios_FED)
+
+consumo_fed_bd <- consumo_fed_bd %>%
+  arrange(Año) %>%
+  mutate(Crecimiento_Consumo_BD_FED = (Consumo_BD_FED / lag(Consumo_BD_FED) - 1) * 100) %>%
+  select(Año, Crecimiento_Consumo_BD_FED)
+
+#  Fusionar con los datos de exceso de retorno del NASDAQ
+datos_fed_serv <- left_join(datos_exceso_retorno, consumo_fed_serv, by = "Año") %>%
+  filter(Año >= 2007)  # Filtrar desde 2007 por disponibilidad de datos
+
+datos_fed_bd <- left_join(datos_exceso_retorno, consumo_fed_bd, by = "Año") %>%
+  filter(Año >= 2007)  # Filtrar desde 2007 por disponibilidad de datos
+
+#  Calcular covarianza con bienes durables y servicios
+cov_fed_serv <- cov(datos_fed_serv$Exceso_Retorno_NASDAQ, datos_fed_serv$Crecimiento_Consumo_Servicios_FED, use = "complete.obs")
+cov_fed_bd <- cov(datos_fed_bd$Exceso_Retorno_NASDAQ, datos_fed_bd$Crecimiento_Consumo_BD_FED, use = "complete.obs")
+
+#  Mostrar resultados
+list("Covarianza con Servicios, EUA" = cov_fed_serv, "Covarianza con Bienes Durables, EUA" = cov_fed_bd)
+```
+
+```{r calcular_covarianza_mexico_bd_serv, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(readxl)
+library(dplyr)
+library(lubridate)
+
+# Cargar la base de datos desde el archivo Excel
+consumo_mexico <- read_excel("c_bys_2003_2024.xlsx")
+
+# Renombrar columnas para facilidad de uso
+consumo_mexico <- consumo_mexico %>%
+  rename(Año = Periods,
+         Consumo_BD_MX = `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Bienes duraderos  /f1 (Millones de pesos a precios de 2018.)  Anual`,
+         Consumo_Servicios_MX = `Cuentas nacionales > Cuentas de bienes y servicios, base 2018 > A precios constantes > Gastos de consumo privado por tipo de bien > Servicios  /f1 (Millones de pesos a precios de 2018.)  Anual`) %>%
+  mutate(Año = as.numeric(Año))  # Convertir Año a numérico
+
+# Calcular tasas de crecimiento real para bienes duraderos y servicios
+consumo_mexico <- consumo_mexico %>%
+  arrange(Año) %>%
+  mutate(Crecimiento_Consumo_BD_MX = (Consumo_BD_MX / lag(Consumo_BD_MX) - 1) * 100,
+         Crecimiento_Consumo_Servicios_MX = (Consumo_Servicios_MX / lag(Consumo_Servicios_MX) - 1) * 100) %>%
+  select(Año, Crecimiento_Consumo_BD_MX, Crecimiento_Consumo_Servicios_MX)
+
+# Fusionar con los datos de exceso de retorno del IPC
+datos_mexico_bd <- left_join(datos_exceso_retorno, consumo_mexico %>% select(Año, Crecimiento_Consumo_BD_MX), by = "Año")
+datos_mexico_serv <- left_join(datos_exceso_retorno, consumo_mexico %>% select(Año, Crecimiento_Consumo_Servicios_MX), by = "Año")
+
+# Calcular covarianza con bienes duraderos y servicios
+cov_mexico_bd <- cov(datos_mexico_bd$Exceso_Retorno_IPC, datos_mexico_bd$Crecimiento_Consumo_BD_MX, use = "complete.obs")
+cov_mexico_serv <- cov(datos_mexico_serv$Exceso_Retorno_IPC, datos_mexico_serv$Crecimiento_Consumo_Servicios_MX, use = "complete.obs")
+
+# Mostrar resultados
+list("Covarianza con Bienes Duraderos, MX" = cov_mexico_bd, "Covarianza con Servicios, MX" = cov_mexico_serv)
+```
+
+Los resultados muestran una **diferencia significativa en la covarianza** entre el exceso de retorno del mercado y el crecimiento del consumo de bienes duraderos y servicios en México y EE.UU. En **México**, la covarianza con **bienes duraderos (112.45)** es considerablemente mayor que con **servicios (20.78)**, lo que sugiere que los ciclos del mercado financiero tienen una mayor conexión con el consumo de bienes duraderos. Esto es consistente con la idea de que los bienes duraderos, al representar compras más grandes y dependientes del crédito, son más sensibles a la evolución del mercado de valores.  
+
+En **EE.UU.**, las covarianzas son mucho más bajas, con **3.42** para bienes duraderos y apenas **0.35** para servicios. Esto implica que el impacto de los cambios en el mercado financiero sobre el consumo agregado es mucho más débil en EE.UU. que en México. La menor dependencia del crédito para el consumo en EE.UU. y la mayor diversificación financiera pueden explicar esta diferencia. Además, en EE.UU., el mercado de servicios es más estable y menos dependiente de la volatilidad del mercado de valores, reflejando una menor correlación con los movimientos financieros de corto plazo.  
+
+
+### ***g)***
+***Calcule el valor de aversión relativa al riesgo que implican estos números, dado el supuesto de una utilidad con forma ARRC.***
+
+```{r calcular_gamma_aversión_riesgo, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+
+# Calcular la varianza de la tasa de crecimiento real del consumo en México y EE.UU.
+var_consumo_mexico <- var(consumo_anual$Crecimiento_Consumo, na.rm = TRUE)
+var_consumo_fed <- var(consumo_fed_anual$Crecimiento_Consumo_FED, na.rm = TRUE)
+
+# Calcular gamma (aversión al riesgo) para México y EE.UU.
+gamma_mexico <- cov_mexico / var_consumo_mexico
+gamma_eeuu <- cov_eeuu / var_consumo_fed
+
+# Mostrar los resultados
+list("Gamma México" = gamma_mexico, "Gamma EE.UU." = gamma_eeuu)
+```
+
+La aversión relativa al riesgo (\(\gamma\)) se estimó utilizando la función de **utilidad con aversión relativa al riesgo constante (CRRA)**, que tiene la forma:
+
+\[
+U(C) = \frac{C^{1-\gamma}}{1-\gamma}
+\]
+
+donde \(\gamma\) representa la **aversión al riesgo** y mide **cómo responde el bienestar de los agentes ante cambios en el consumo**. Para calcular \(\gamma\), se utilizó la ecuación derivada del **modelo intertemporal de la CAPM**:
+
+\[
+\gamma = \frac{\text{Cov}(\Delta C, R_m - R_f)}{\text{Var}(\Delta C)}
+\]
+
+donde \(\text{Cov}(\Delta C, R_m - R_f)\) es la **covarianza entre la tasa de crecimiento del consumo y el exceso de retorno del mercado**, y \(\text{Var}(\Delta C)\) es la **varianza del crecimiento del consumo**.  
+
+Los resultados muestran que la aversión relativa al riesgo en **México (\(\gamma = 0.11\)) es considerablemente menor que en EE.UU. (\(\gamma = 0.47\))**. Esto implica que, en promedio, los consumidores en México **son menos sensibles a los cambios en el consumo** en comparación con los de EE.UU., lo que podría indicar una menor precaución frente a la incertidumbre económica. En contraste, la mayor aversión al riesgo en EE.UU. sugiere que **los hogares responden más fuertemente a las fluctuaciones económicas**, lo que puede estar relacionado con una mayor aversión al riesgo en sus decisiones de inversión y ahorro. Estos resultados pueden deberse a diferencias estructurales en los mercados financieros, acceso al crédito y mecanismos de estabilización económica en cada país.  
+
+
+### ***h)***
+***Para el caso de México, calcule la covarianza entre dicha diferencias y la tasa de crecimiento real del consumo agregado DE BIENES IMPORTADOS de México,[aquí hay una serie: www.inegi.org.mx/temas/imcp/] de la economía mexicana.***
+
+```{r calcular_covarianza_mexico_importados, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+library(lubridate)
+library(readxl)
+
+# Cargar la base de datos desde el archivo Excel
+consumo_importado_mexico <- read_excel("od_global_bs_T193_T32024.xlsx")
+
+# Renombrar columnas para facilidad de uso
+consumo_importado_mexico <- consumo_importado_mexico %>%
+  rename(Año = Periods, 
+         Consumo_Importado_MX = `Indicadores económicos de coyuntura > Oferta y demanda global de bienes y servicios, base 2018 > Series Originales > A precios constantes > Oferta > Valores absolutos acumulados > Importaciones de bienes y servicios  /a /f1 (Millones de pesos a precios de 2018.)  Trimestral`) %>%
+  mutate(Año = year(as.Date(paste0(Año, "/01"), format="%Y/%m/%d")))  # Convertir fecha y extraer Año
+
+# Convertir de trimestral a anual sumando los valores trimestrales de cada año
+consumo_importado_anual <- consumo_importado_mexico %>%
+  group_by(Año) %>%
+  summarise(Consumo_Importado_MX = sum(Consumo_Importado_MX, na.rm = TRUE)) %>%
+  ungroup()
+
+# Calcular la tasa de crecimiento real del consumo de bienes importados
+consumo_importado_anual <- consumo_importado_anual %>%
+  arrange(Año) %>%
+  mutate(Crecimiento_Consumo_Importado_MX = (Consumo_Importado_MX / lag(Consumo_Importado_MX) - 1) * 100) %>%
+  select(Año, Crecimiento_Consumo_Importado_MX)
+
+# Fusionar con los datos de exceso de retorno del IPC
+datos_mexico_importados <- left_join(datos_exceso_retorno, consumo_importado_anual, by = "Año")
+
+# Calcular la covarianza con la tasa de crecimiento del consumo de bienes importados
+cov_mexico_importados <- cov(datos_mexico_importados$Exceso_Retorno_IPC, datos_mexico_importados$Crecimiento_Consumo_Importado_MX, use = "complete.obs")
+
+# Mostrar resultado
+cov_mexico_importados
+```
+
+El valor de la covarianza entre el **exceso de retorno del IPC y la tasa de crecimiento real del consumo de bienes importados en México** es **138.37**, lo que sugiere una **fuerte relación positiva** entre estas dos variables. Esto implica que cuando el rendimiento del mercado de valores en México es alto, el consumo de bienes importados tiende a aumentar significativamente. Esta relación puede deberse a que un mejor desempeño del mercado financiero genera **efectos de riqueza y confianza**, incentivando a los consumidores a gastar más en bienes importados, que suelen ser bienes de consumo duradero o productos de alto valor agregado. 
+
+### ***i)***
+***Calcule el valor de aversión relativa al riesgo que implican estos números, dado el supuesto de una utilidad con forma ARRC.***
+
+```{r calcular_gamma_importados, echo=FALSE, message=FALSE, warning=FALSE}
+# Cargar librerías necesarias
+library(dplyr)
+
+# Calcular la varianza de la tasa de crecimiento real del consumo de bienes importados
+var_consumo_importados <- var(consumo_importado_anual$Crecimiento_Consumo_Importado_MX, na.rm = TRUE)
+
+# Calcular gamma (aversión al riesgo) para bienes importados
+gamma_importados <- cov_mexico_importados / var_consumo_importados
+
+# Mostrar el resultado
+gamma_importados
+```
+
+El coeficiente de aversión relativa al riesgo (\(\gamma\)) estimado para el consumo de bienes importados en México es **0.216**, lo que indica una **baja sensibilidad de los consumidores al riesgo financiero en este tipo de bienes**. Este valor implica que los hogares mexicanos **no reaccionan de manera extrema ante fluctuaciones en el mercado financiero** cuando se trata de ajustar su consumo de bienes importados. Un coeficiente más alto sugeriría que los consumidores reducen drásticamente su consumo de bienes importados en períodos de incertidumbre, mientras que un valor bajo como este sugiere que el consumo de bienes importados no está fuertemente influenciado por la volatilidad financiera. Esto puede deberse a que estos bienes tienen una **demanda relativamente inelástica**, o a que los consumidores tienen mecanismos alternativos (como crédito o ahorro) que les permiten mantener su consumo incluso en condiciones de mercado adversas.  
+
+
+
+### ***j)***
+***Interprete sus resultados.***
+
+Los resultados obtenidos en este análisis nos permiten evaluar la **relación entre el riesgo financiero y el consumo agregado** en México y EE.UU., proporcionando evidencia empírica sobre el **acertijo del riesgo** ("Equity Premium Puzzle"). Este acertijo, planteado por Mehra y Prescott (1985), establece que los modelos estándar de consumo con aversión al riesgo **subestiman el diferencial entre los rendimientos esperados del mercado accionario y la tasa libre de riesgo**, a menos que los consumidores tengan una **aversión al riesgo extremadamente alta**.
+
+En nuestro caso, los valores de \(\gamma\) obtenidos para México y EE.UU. son **relativamente bajos** (\(\gamma_{MX} = 0.11\), \(\gamma_{EE.UU.} = 0.47\)), lo que indica que los consumidores **no muestran una aversión extrema al riesgo**, en contraste con lo que sería necesario para explicar las altas primas de riesgo observadas en los mercados financieros. Específicamente, encontramos que el **crecimiento del consumo está débilmente correlacionado con el exceso de retorno del mercado**, particularmente en EE.UU., donde la covarianza entre consumo y mercado es baja. Esto sugiere que los consumidores **no ajustan drásticamente su consumo ante cambios en el mercado accionario**, lo que refuerza el acertijo del riesgo: la prima de riesgo observada en el mercado accionario sigue siendo demasiado alta en comparación con la baja sensibilidad del consumo ante la volatilidad financiera.
+
+Para México, la relación entre consumo y mercado es **más fuerte**, especialmente en bienes duraderos e importados, donde la covarianza es significativa. Sin embargo, la aversión al riesgo sigue siendo baja, lo que indica que los consumidores en México **responden más a fluctuaciones financieras, pero no en un grado suficiente para justificar la prima de riesgo observada en el mercado**. En contraste, EE.UU. muestra **una desconexión aún mayor entre el consumo y los mercados financieros**, reforzando aún más el acertijo del riesgo en un país con mercados financieros más desarrollados y diversificados.
+
+Estos resultados implican que el modelo estándar de aversión al riesgo **no explica completamente las decisiones de los consumidores** en la práctica. Factores como **restricciones de liquidez, expectativas de ingreso futuro, acceso al crédito y comportamiento no racional** podrían estar jugando un papel clave en la desconexión entre consumo y riesgo financiero.  
+
+## **Ejercicio 7 **
+Utilice el método del árbol binomial para, primero, explicar el precio P=200 de un activo y, después, valuar un “call” sobre dicho activo, con precio de ejercicio K = P - N * 5 donde N es el número de su equipo, (Grupo 1, use N=1, Grupo 2, use N=2, etc) asumiendo una tasa de interés de 5 por ciento. [1 horas, 2 puntos]
+
+
+Para resolver este ejercicio, aplicaremos el **método del árbol binomial** para valuar un **call** sobre un activo con precio inicial **\( P = 200 \)**, un precio de ejercicio definido como **\( K = P - N \times 5 \)**, y una tasa de interés del **5%**.
+
+El **método del árbol binomial** se basa en la evolución de los precios del activo en **periodos discretos**. En cada paso, el precio puede **subir (\( u \))** o **bajar (\( d \))**, formando un **árbol de precios**. Luego, utilizando **valoración por riesgo neutral**, calculamos el valor del **call option** en cada nodo y descontamos hacia atrás hasta obtener su precio actual.  
+```{r graf_arbol_binomial, echo=FALSE, results="hide", eval=TRUE, fig.cap="Árbol Binomial del Precio del Activo", warning=FALSE, message=FALSE, fig.width=7, fig.height=5, fig.pos="t"}
+# Cargar librerías necesarias
+library(igraph)
+
+# Parámetros
+P0 <- 200  # Precio inicial del activo
+r <- 0.05  # Tasa de interés del 5%
+N <- 2  # Somos equipo 2, por lo que N = 2
+K <- P0 - N * 5  # Precio de ejercicio del call
+
+# Factores de subida y bajada
+u <- 1.2  # Subida del 20%
+d <- 0.8  # Bajada del 20%
+
+# Construcción del árbol binomial
+P1_up <- P0 * u
+P1_down <- P0 * d
+P2_uu <- P1_up * u
+P2_ud <- P1_up * d
+P2_dd <- P1_down * d
+
+# Crear dataframe de nodos con sus precios
+df_nodos <- data.frame(
+  Nodo = c("P0", "P1_up", "P1_down", "P2_uu", "P2_ud", "P2_dd"),
+  Precio = c(P0, P1_up, P1_down, P2_uu, P2_ud, P2_dd)
+)
+
+# Definir conexiones entre nodos con etiquetas (subida/bajada)
+df_edges <- data.frame(
+  from = c("P0", "P0", "P1_up", "P1_up", "P1_down", "P1_down"),
+  to = c("P1_up", "P1_down", "P2_uu", "P2_ud", "P2_ud", "P2_dd"),
+  label = c("u", "d", "u", "d", "u", "d")  # Etiquetas en las flechas
+)
+
+# Crear gráfico de árbol binomial con mejor formato
+g_arbol <- graph_from_data_frame(df_edges, vertices = df_nodos, directed = TRUE)
+
+# Mostrar la gráfica del árbol binomial
+plot(g_arbol, 
+     layout = layout_as_tree(g_arbol, flip.y = FALSE),  # Organiza en forma de árbol
+     vertex.label = round(df_nodos$Precio, 2),  # Etiquetas con precios
+     vertex.size = 50,  # Aumenta el tamaño de los nodos para más espacio
+     vertex.color = "lightblue",  # Color de nodos más claro
+     vertex.frame.color = "black",  # Marco negro para los nodos
+     vertex.label.color = "black",  # Color del texto en nodos
+     vertex.label.cex = 1.5,  # Tamaño de la fuente de los nodos más grande
+     edge.arrow.size = 1,  # Tamaño de las flechas más grande
+     edge.label = df_edges$label,  # Etiquetas en las flechas (u/d)
+     edge.label.cex = 1.2,  # Tamaño del texto de las flechas
+     edge.color = "gray40",  # Color de las conexiones
+     main = "Árbol Binomial del Precio del Activo")  # Título de la gráfica
+
+g_arbol
+```
+
+En esta grafica se muestra un árbol binomial del precio del activo, donde cada nodo representa un posible valor del activo en un punto del tiempo. El precio inicial del activo es \( P_0 = 200 \), y en cada periodo el precio puede subir (\( u \)) o bajar (\( d \)), con factores de \( u = 1.2 \) (subida del 20%) y \( d = 0.8 \) (bajada del 20%). Usando estos factores, los precios en cada nodo se calculan como sigue: en el primer periodo (t=1), el nodo superior se obtiene como \( P_1^{(up)} = P_0 \times u = 200 \times 1.2 = 240 \) y el nodo inferior como \( P_1^{(down)} = P_0 \times d = 200 \times 0.8 = 160 \). En el segundo periodo (t=2), se tienen los valores \( P_2^{(uu)} = P_1^{(up)} \times u = 240 \times 1.2 = 288 \), \( P_2^{(ud)} = P_1^{(up)} \times d = 240 \times 0.8 = 192 \) y \( P_2^{(dd)} = P_1^{(down)} \times d = 160 \times 0.8 = 128 \). Cada nodo muestra el precio del activo en ese estado y las flechas indican la transición entre estados, donde "u" representa un aumento en el precio y "d" una disminución. Este modelo permite analizar la evolución del precio de un activo en el tiempo y es la base para la valoración de opciones financieras mediante el método de valoración por riesgo neutral.  
+
+```{r calcular_call_binomial, echo=FALSE, eval=TRUE, fig.cap="Valoración de la Opción Call con el Árbol Binomial", warning=FALSE, message=FALSE, fig.width=7, fig.height=5, fig.pos="t"}
+# Parámetros
+P0 <- 200  # Precio inicial del activo
+r <- 0.05  # Tasa de interés del 5%
+N <- 2  # Número de equipo (Grupo 2 usa N=2)
+K <- P0 - N * 5  # Precio de ejercicio
+
+# Factores de subida y bajada
+u <- 1.2  # Subida del 20%
+d <- 0.8  # Bajada del 20%
+
+# Construcción del árbol binomial de precios
+P1_up <- P0 * u
+P1_down <- P0 * d
+P2_uu <- P1_up * u
+P2_ud <- P1_up * d
+P2_dd <- P1_down * d
+
+# Payoff de la opción Call en los nodos terminales
+C2_uu <- max(P2_uu - K, 0)
+C2_ud <- max(P2_ud - K, 0)
+C2_dd <- max(P2_dd - K, 0)
+
+# Calcular la probabilidad riesgo-neutral
+p <- (1 + r - d) / (u - d)
+
+# Retroceder en el árbol usando valoración por riesgo neutral
+C1_up <- (p * C2_uu + (1 - p) * C2_ud) / (1 + r)
+C1_down <- (p * C2_ud + (1 - p) * C2_dd) / (1 + r)
+
+# Valor de la opción call en t=0
+C0 <- (p * C1_up + (1 - p) * C1_down) / (1 + r)
+
+# Mostrar resultado final
+cat("El valor de la opción call en t=0 es:", round(C0, 2))
+```
+El cálculo del **valor de la opción call** utilizando el **método del árbol binomial** nos permite determinar cuánto vale la opción en \( t=0 \) en función de los posibles precios futuros del activo subyacente.  
+
+La opción **call** otorga el derecho a comprar el activo en el futuro a un precio fijo \( K \). Su valor en cada nodo terminal se define como:
+
+\[
+C_T = \max(P_T - K, 0)
+\]
+
+Donde \( P_T \) es el precio del activo en el nodo terminal y \( K \) es el precio de ejercicio.  
+
+En este caso, calculamos los valores del call en los nodos terminales:
+
+\[
+C_2^{(uu)} = \max(288 - 190, 0) = 98
+\]
+\[
+C_2^{(ud)} = \max(192 - 190, 0) = 2
+\]
+\[
+C_2^{(dd)} = \max(128 - 190, 0) = 0
+\]
+
+Después, utilizamos **valoración por riesgo-neutral** para retroceder en el árbol y calcular los valores en los nodos anteriores. La **probabilidad riesgo-neutral** está dada por:
+
+\[
+p = \frac{(1 + r) - d}{u - d} = \frac{(1.05 - 0.8)}{(1.2 - 0.8)} = 0.625
+\]
+
+Usamos esta probabilidad para calcular los valores de la opción en el primer periodo:
+
+\[
+C_1^{(up)} = \frac{0.625 \cdot 98 + (1 - 0.625) \cdot 2}{1.05} = 59.82
+\]
+
+\[
+C_1^{(down)} = \frac{0.625 \cdot 2 + (1 - 0.625) \cdot 0}{1.05} = 1.19
+\]
+
+Finalmente, calculamos el valor del call en \( t=0 \):
+
+\[
+C_0 = \frac{0.625 \cdot 59.82 + (1 - 0.625) \cdot 1.19}{1.05} = 35.57
+\]
+
+El valor del call en \( t=0 \) es **35.57**, lo que implica que, bajo el supuesto de mercados **sin oportunidades de arbitraje**, este es el precio justo de la opción hoy. Si el precio de mercado del call fuera mayor a **35.57**, estaría sobrevalorado y habría incentivos para venderlo. Si fuera menor, estaría infravalorado y se presentaría una oportunidad de compra.  
+
+
+
+
+
+
+
